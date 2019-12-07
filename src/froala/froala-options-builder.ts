@@ -186,6 +186,26 @@ export class FroalaOptionsBuilder {
   private _linkNoReferrer: boolean;
   private _linkStyles: object;
   private _linkText: boolean;
+  // Paragraph Format
+  private _paragraphDefaultSelection: string;
+  private _paragraphFormat: object;
+  private _paragraphFormatSelection: boolean;
+  private _paragraphMultipleStyles: boolean;
+  private _paragraphStyles: object;
+  private _lineHeights: object;
+  // Lists
+  private _listAdvancedTypes: boolean;
+  // Quick Insert
+  private _quickInsertButtons: string[];
+  private _quickInsertEnabled: boolean;
+  private _quickInsertTags: string[];
+  // Font Awesome
+  private _faButtons: string[];
+  private _fontAwesomeSets: object;
+  private _fontAwesomeTemplate: string;
+  // Special Characters
+  private _specialCharButtons: string[];
+  private _specialCharactersSets: object;
 
   /**
    * You must call this method at last
@@ -2808,5 +2828,247 @@ export class FroalaOptionsBuilder {
   }
   get linkText(): boolean {
     return this._linkText;
+  }
+
+  /**
+   * The default option to select for Paragraph Format.
+   *
+   * [Require plugin]	paragraph_format.min.js
+   *
+   * @param {string} value
+   * @return {FroalaOptionsBuilder}
+   */
+  ParagraphDefaultSelection(value: string): FroalaOptionsBuilder {
+    this._paragraphDefaultSelection = value;
+    return this;
+  }
+  get paragraphDefaultSelection(): string {
+    return this._paragraphDefaultSelection;
+  }
+
+  /**
+   * An Object with the options that will appear in the Paragraph Format dropdown from the toolbar.
+   * Where 'N' tag will be treated as a <p> when the enter option is set to '$.FroalaEditor.ENTER_P' and as a <div> when the enter option is set to '$.FroalaEditor.ENTER_DIV'.
+   *
+   * [Require plugin]	paragraph_format.min.js
+   *
+   * @param {object} value
+   * @return {FroalaOptionsBuilder}
+   */
+  ParagraphFormat(value: object): FroalaOptionsBuilder {
+    this._paragraphFormat = value;
+    return this;
+  }
+  get paragraphFormat(): object {
+    return this._paragraphFormat;
+  }
+
+  /**
+   * The Paragraph Format button from the WYSIWYG editor's toolbar is replaced with a dropdown showing the actual paragraph format name for the current text selection.
+   *
+   * [Require plugin]	paragraph_format.min.js
+   *
+   * @param {boolean} value
+   * @return {FroalaOptionsBuilder}
+   */
+  ParagraphFormatSelection(value: boolean): FroalaOptionsBuilder {
+    this._paragraphFormatSelection = value;
+    return this;
+  }
+  get paragraphFormatSelection(): boolean {
+    return this._paragraphFormatSelection;
+  }
+
+  /**
+   * Allows multiple paragraph styles to be selected at a time.
+   *
+   * [Require plugin]	paragraph_format.min.js
+   *
+   * @param {boolean} value
+   * @return {FroalaOptionsBuilder}
+   */
+  ParagraphMultipleStyles(value: boolean): FroalaOptionsBuilder {
+    this._paragraphMultipleStyles = value;
+    return this;
+  }
+  get paragraphMultipleStyles(): boolean {
+    return this._paragraphMultipleStyles;
+  }
+
+  /**
+   * Set custom styles for the selected paragraph.
+   * The classes should be defined in CSS, otherwise no changes will be visible on the paragraph's appearance.
+   *
+   * [Require plugin]	paragraph_style.min.js
+   *
+   * @param {object} value
+   * @return {FroalaOptionsBuilder}
+   */
+  ParagraphStyles(value: object): FroalaOptionsBuilder {
+    this._paragraphStyles = value;
+    return this;
+  }
+  get paragraphStyles(): object {
+    return this._paragraphStyles;
+  }
+
+  /**
+   * Set the line height for the current selected paragraph.
+   *
+   * [Require plugin]	line_height.min.js
+   *
+   * @param {object} value
+   * @return {FroalaOptionsBuilder}
+   */
+  LineHeights(value: object): FroalaOptionsBuilder {
+    this._lineHeights = value;
+    return this;
+  }
+  get lineHeights(): object {
+    return this._lineHeights;
+  }
+
+  /**
+   * Enables list advanced types for the bullets.
+   *
+   * [Require plugin]	lists.min.js
+   *
+   * @param {boolean} value
+   * @return {FroalaOptionsBuilder}
+   */
+  ListAdvancedTypes(value: boolean): FroalaOptionsBuilder {
+    this._listAdvancedTypes = value;
+    return this;
+  }
+  get listAdvancedTypes(): boolean {
+    return this._listAdvancedTypes;
+  }
+
+  /**
+   * The buttons to display in quick insert.
+   *
+   * [Require plugin]	quick_insert.min.js
+   *
+   * @param {string[]} values
+   * @return {FroalaOptionsBuilder}
+   */
+  QuickInsertButtons(values: string[]): FroalaOptionsBuilder {
+    this._quickInsertButtons = values;
+    return this;
+  }
+  get quickInsertButtons(): string[] {
+    return this._quickInsertButtons;
+  }
+
+  /**
+   * To enable quick insert functionality.
+   *
+   * [Require plugin]	quick_insert.min.js
+   *
+   * @param {boolean} value
+   * @return {FroalaOptionsBuilder}
+   */
+  QuickInsertEnabled(value: boolean): FroalaOptionsBuilder {
+    this._quickInsertEnabled = value;
+    return this;
+  }
+  get quickInsertEnabled(): boolean {
+    return this._quickInsertEnabled;
+  }
+
+  /**
+   * The list of tags for which the quick insert button will appear when empty.
+   *
+   * [Require plugin]	quick_insert.min.js
+   *
+   * @param {string[]} values
+   * @return {FroalaOptionsBuilder}
+   */
+  QuickInsertTags(values: string[]): FroalaOptionsBuilder {
+    this._quickInsertTags = values;
+    return this;
+  }
+  get quickInsertTags(): string[] {
+    return this._quickInsertTags;
+  }
+
+  /**
+   * The list of Font Awesome buttons to show in the popup for inserting icons.
+   *
+   * [Require third party]	font_awesome.min.js
+   *
+   * @param {string[]} values
+   * @return {FroalaOptionsBuilder}
+   */
+  FontAwesomeButtons(values: string[]): FroalaOptionsBuilder {
+    this._faButtons = values;
+    return this;
+  }
+  get fontAwesomeButtons(): string[] {
+    return this._faButtons;
+  }
+
+  /**
+   * The list of Font Awesome icons to show in the modal for inserting icons.
+   *
+   * [Require third party]	font_awesome.min.js
+   *
+   * @param {object} value
+   * @return {FroalaOptionsBuilder}
+   */
+  FontAwesomeSets(value: object): FroalaOptionsBuilder {
+    this._fontAwesomeSets = value;
+    return this;
+  }
+  get fontAwesomeSets(): object {
+    return this._fontAwesomeSets;
+  }
+
+  /**
+   * Set the template to be used for the Font Awesome icons inserted in the editor.
+   *
+   * [Require third party]	font_awesome.min.js
+   *
+   * @param {string} value
+   * @return {FroalaOptionsBuilder}
+   */
+  FontAwesomeTemplate(value: string): FroalaOptionsBuilder {
+    this._fontAwesomeTemplate = value;
+    return this;
+  }
+  get fontAwesomeTemplate(): string {
+    return this._fontAwesomeTemplate;
+  }
+
+  /**
+   * The list of special characters buttons for popup.
+   *
+   * [Require third party]	special_characters.min.js
+   *
+   * @param {string[]} values
+   * @return {FroalaOptionsBuilder}
+   */
+  SpecialCharButtons(values: string[]): FroalaOptionsBuilder {
+    this._specialCharButtons = values;
+    return this;
+  }
+  get specialCharButtons(): string[] {
+    return this._specialCharButtons;
+  }
+
+  /**
+   * The list of special characters to show.
+   *
+   * [Require third party]	special_characters.min.js
+   *
+   * @param {object} value
+   * @return {FroalaOptionsBuilder}
+   */
+  SpecialCharactersSets(value: object): FroalaOptionsBuilder {
+    this._specialCharactersSets = value;
+    return this;
+  }
+  get specialCharactersSets(): object {
+    return this._specialCharactersSets;
   }
 }

@@ -294,6 +294,26 @@ export namespace Froala {
     linkNoReferrer: boolean;
     linkStyles: object;
     linkText: boolean;
+    // Paragraph Format
+    paragraphDefaultSelection: string;
+    paragraphFormat: object;
+    paragraphFormatSelection: boolean;
+    paragraphMultipleStyles: boolean;
+    paragraphStyles: object;
+    lineHeights: object;
+    // Lists
+    listAdvancedTypes: boolean;
+    // Quick Insert
+    quickInsertButtons: string[];
+    quickInsertEnabled: boolean;
+    quickInsertTags: string[];
+    // Font Awesome
+    faButtons: string[];
+    fontAwesomeSets: object;
+    fontAwesomeTemplate: string;
+    // Special Characters
+    specialCharButtons: string[];
+    specialCharactersSets: object;
 
     constructor(builder: FroalaOptionsBuilder) {
       if (!_.isNil(builder.key)) {
@@ -779,6 +799,51 @@ export namespace Froala {
       }
       if (!_.isNil(builder.linkText)) {
         this.linkText = builder.linkText;
+      }
+      if (!_.isNil(builder.paragraphDefaultSelection)) {
+        this.paragraphDefaultSelection = builder.paragraphDefaultSelection;
+      }
+      if (!_.isNil(builder.paragraphFormatSelection)) {
+        this.paragraphFormatSelection = builder.paragraphFormatSelection;
+      }
+      if (!_.isNil(builder.paragraphFormat)) {
+        this.paragraphFormat = builder.paragraphFormat;
+      }
+      if (!_.isNil(builder.paragraphMultipleStyles)) {
+        this.paragraphMultipleStyles = builder.paragraphMultipleStyles;
+      }
+      if (!_.isNil(builder.paragraphStyles)) {
+        this.paragraphStyles = builder.paragraphStyles;
+      }
+      if (!_.isNil(builder.lineHeights)) {
+        this.lineHeights = builder.lineHeights;
+      }
+      if (!_.isNil(builder.listAdvancedTypes)) {
+        this.listAdvancedTypes = builder.listAdvancedTypes;
+      }
+      if (!_.isNil(builder.quickInsertButtons)) {
+        this.quickInsertButtons = builder.quickInsertButtons;
+      }
+      if (!_.isNil(builder.quickInsertEnabled)) {
+        this.quickInsertEnabled = builder.quickInsertEnabled;
+      }
+      if (!_.isNil(builder.quickInsertTags)) {
+        this.quickInsertTags = builder.quickInsertTags;
+      }
+      if (!_.isNil(builder.fontAwesomeButtons)) {
+        this.faButtons = builder.fontAwesomeButtons;
+      }
+      if (!_.isNil(builder.fontAwesomeSets)) {
+        this.fontAwesomeSets = builder.fontAwesomeSets;
+      }
+      if (!_.isNil(builder.fontAwesomeTemplate)) {
+        this.fontAwesomeTemplate = builder.fontAwesomeTemplate;
+      }
+      if (!_.isNil(builder.specialCharButtons)) {
+        this.specialCharButtons = builder.specialCharButtons;
+      }
+      if (!_.isNil(builder.specialCharactersSets)) {
+        this.specialCharactersSets = builder.specialCharactersSets;
       }
 
     }
