@@ -13,7 +13,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     // set froala editor options
-    this.froalaOptions = new Froala.OptionsBuilder().build();
+    this.froalaOptions = new Froala.OptionsBuilder()
+      .FontSize(['1','5','10'])
+      .build();
     console.log(this.froalaOptions);
   }
 }
