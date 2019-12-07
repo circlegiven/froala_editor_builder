@@ -146,8 +146,22 @@ export class FroalaOptionsBuilder {
   private _imageUploadRemoteUrls: boolean;
   private _imageUploadToS3: object;
   private _imageUploadURL: string;
+  // Image Manager
+  private _imageManagerDeleteMethod: Froala.HttpMethod;
+  private _imageManagerDeleteParams: object;
+  private _imageManagerDeleteURL: string;
+  private _imageManagerLoadMethod: Froala.HttpMethod;
+  private _imageManagerLoadParams: object;
+  private _imageManagerLoadURL: string;
+  private _imageManagerPageSize: number;
+  private _imageManagerPreloader: string;
+  private _imageManagerScrollOffset: number;
+  private _imageManagerToggleTags: boolean;
 
-
+  /**
+   * You must call this method at last
+   * @return {Froala.Options}
+   */
   build(): Froala.Options {
     return new Froala.Options(this);
   }
@@ -2151,5 +2165,158 @@ export class FroalaOptionsBuilder {
   }
   get imageUploadURL(): string {
     return this._imageUploadURL;
+  }
+
+  /**
+   * The HTTP image manager delete image request type.
+   * [Require plugin] image_manager.min.js
+   *
+   * @param {Froala.HttpMethod} value
+   * @return {FroalaOptionsBuilder}
+   */
+  ImageManagerDeleteMethod(value: Froala.HttpMethod): FroalaOptionsBuilder {
+    this._imageManagerDeleteMethod = value;
+    return this;
+  }
+  get imageManagerDeleteMethod(): Froala.HttpMethod {
+    return this._imageManagerDeleteMethod;
+  }
+
+  /**
+   * Additional parameters passed to the image manager image delete request.
+   * [Require plugin] image_manager.min.js
+   *
+   * @param {object} value
+   * @return {FroalaOptionsBuilder}
+   */
+  ImageManagerDeleteParams(value: object): FroalaOptionsBuilder {
+    this._imageManagerDeleteParams = value;
+    return this;
+  }
+  get imageManagerDeleteParams(): object {
+    return this._imageManagerDeleteParams;
+  }
+
+  /**
+   * The URL where the HTTP request is done to delete the image.
+   * The request will contain the image source as src parameter.
+   * [Require plugin] image_manager.min.js
+   *
+   * @param {string} value
+   * @return {FroalaOptionsBuilder}
+   */
+  ImageManagerDeleteURL(value: string): FroalaOptionsBuilder {
+    this._imageManagerDeleteURL = value;
+    return this;
+  }
+  get imageManagerDeleteURL(): string {
+    return this._imageManagerDeleteURL;
+  }
+
+  /**
+   * The HTTP image manager load images request type.
+   * [Require plugin] image_manager.min.js
+   *
+   * @param {Froala.HttpMethod} value
+   * @return {FroalaOptionsBuilder}
+   */
+  ImageManagerLoadMethod(value: Froala.HttpMethod): FroalaOptionsBuilder {
+    this._imageManagerDeleteURL = value;
+    return this;
+  }
+  get imageManagerLoadMethod(): Froala.HttpMethod {
+    return this._imageManagerLoadMethod;
+  }
+
+  /**
+   * Additional parameters passed to the load images request from the image manager.
+   * [Require plugin] image_manager.min.js
+   *
+   * @param {object} value
+   * @return {FroalaOptionsBuilder}
+   */
+  ImageManagerLoadParams(value: object): FroalaOptionsBuilder {
+    this._imageManagerLoadParams = value;
+    return this;
+  }
+  get imageManagerLoadParams(): object {
+    return this._imageManagerLoadParams;
+  }
+
+  /**
+   * The URL where the HTTP request is done in order to load a page of images that appear in the image manager.
+   * The response should be an array with an Object for each image (https://www.froala.com/wysiwyg-editor/docs/options#imageManagerLoadURL)
+   * [Require plugin] image_manager.min.js
+   *
+   * @param {string} value
+   * @return {FroalaOptionsBuilder}
+   */
+  ImageManagerLoadURL(value: string): FroalaOptionsBuilder {
+    this._imageManagerLoadURL = value;
+    return this;
+  }
+  get imageManagerLoadURL(): string {
+    return this._imageManagerLoadURL;
+  }
+
+  /**
+   * The number of images loaded per page in the image manager.
+   * [Require plugin] image_manager.min.js
+   *
+   * @param {number} value
+   * @return {FroalaOptionsBuilder}
+   */
+  ImageManagerPageSize(value: number): FroalaOptionsBuilder {
+    this._imageManagerPageSize = value;
+    return this;
+  }
+  get imageManagerPageSize(): number {
+    return this._imageManagerPageSize;
+  }
+
+  /**
+   * The path to a gif image to be displayed while loading the images from the server in the image manager.
+   * If no option is specified, "Loading.." text will appear.
+   * [Require plugin] image_manager.min.js
+   *
+   * @param {string} value
+   * @return {FroalaOptionsBuilder}
+   */
+  ImageManagerPreloader(value: string): FroalaOptionsBuilder {
+    this._imageManagerPreloader = value;
+    return this;
+  }
+  get imageManagerPreloader(): string {
+    return this._imageManagerPreloader;
+  }
+
+  /**
+   * The distance in pixels from the bottom of the scrollable content at which to trigger the loading of the next page of images.
+   * [Require plugin] image_manager.min.js
+   *
+   * @param {number} value
+   * @return {FroalaOptionsBuilder}
+   */
+  ImageManagerScrollOffset(value: number): FroalaOptionsBuilder {
+    this._imageManagerScrollOffset = value;
+    return this;
+  }
+  get imageManagerScrollOffset(): number {
+    return this._imageManagerScrollOffset;
+  }
+
+  /**
+   * To enable/disable toggle of filter tags for image manager popup.
+   * [Require plugin] image_manager.min.js
+   *
+   * @param {boolean} value
+   * @return {FroalaOptionsBuilder}
+   */
+  ImageManagerToggleTags(value: boolean): FroalaOptionsBuilder {
+    this._imageManagerToggleTags = value;
+    return this;
+  }
+  get imageManagerToggleTags(): boolean {
+    return this._imageManagerToggleTags;
   }
 }

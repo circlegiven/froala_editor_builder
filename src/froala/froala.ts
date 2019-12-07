@@ -31,7 +31,9 @@ export namespace Froala {
   }
   export enum HttpMethod {
     POST = 'POST',
-    PUT = 'PUT'
+    PUT = 'PUT',
+    DELETE = 'DELETE',
+    GET = 'GET'
   }
   export enum EnterKey {
     // ENTER_P = $.FroalaEditor.ENTER_P,
@@ -73,13 +75,13 @@ export namespace Froala {
     WORD_PASTE = 'wordPaste',
   }
   export class Options {
-    // colors
+    // Colors
     colorsBackground: string[];
     colorsButtons: string[];
     colorsHEXInput: boolean;
     colorsStep: number;
     colorsText: string[];
-    // draggable
+    // Draggable
     dragInline: boolean;
     // Embedly
     embedlyKey: string;
@@ -213,6 +215,17 @@ export namespace Froala {
     imageUploadRemoteUrls: boolean;
     imageUploadToS3: boolean;
     imageUploadURL: string;
+    // Image Manager
+    imageManagerDeleteMethod: HttpMethod;
+    imageManagerDeleteParams: object;
+    imageManagerDeleteURL: string;
+    imageManagerLoadMethod: HttpMethod;
+    imageManagerLoadParams: object;
+    imageManagerLoadURL: string;
+    imageManagerPageSize: number;
+    imageManagerPreloader: string;
+    imageManagerScrollOffset: number;
+    imageManagerToggleTags: boolean;
 
     constructor(builder: FroalaOptionsBuilder) {
       if (!_.isNil(builder.colorsBackground)) {
