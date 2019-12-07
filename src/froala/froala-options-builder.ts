@@ -221,7 +221,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * An array of colors used in the colors popup for background.
-   * Passing REMOVE as a value in the array will display the Clear Formatting button for colors.
+   * Passing 'REMOVE' as a value in the array will display the Clear Formatting button for colors.
    *
    * [Require plugin] colors.min.js
    *
@@ -286,7 +286,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * An array of colors used in the colors popup for text.
-   * Passing REMOVE as a value in the array will display the Clear Formatting button for colors.
+   * Passing 'REMOVE' as a value in the array will display the Clear Formatting button for colors.
    *
    * [Require plugin] colors.min.js
    *
