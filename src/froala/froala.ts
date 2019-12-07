@@ -276,6 +276,10 @@ export namespace Froala {
     inlineClasses: object;
     // Language
     language: Language;
+    // Line Breaker
+    lineBreakerHorizontalOffset: number;
+    lineBreakerOffset: number;
+    lineBreakerTags: string[];
 
     constructor(builder: FroalaOptionsBuilder) {
       if (!_.isNil(builder.key)) {
@@ -713,6 +717,15 @@ export namespace Froala {
       }
       if (!_.isNil(builder.language)) {
         this.language = builder.language;
+      }
+      if (!_.isNil(builder.lineBreakerHorizontalOffset)) {
+        this.lineBreakerHorizontalOffset = builder.lineBreakerHorizontalOffset;
+      }
+      if (!_.isNil(builder.lineBreakerOffset)) {
+        this.lineBreakerOffset = builder.lineBreakerOffset;
+      }
+      if (!_.isNil(builder.lineBreakerTags)) {
+        this.lineBreakerTags = builder.lineBreakerTags;
       }
     }
   }

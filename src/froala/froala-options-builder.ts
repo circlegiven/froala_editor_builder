@@ -168,6 +168,10 @@ export class FroalaOptionsBuilder {
   private _inlineClasses: object;
   // Language
   private _language: Froala.Language;
+  // Line Breaker
+  private _lineBreakerHorizontalOffset: number;
+  private _lineBreakerOffset: number;
+  private _lineBreakerTags: string[];
 
   /**
    * You must call this method at last
@@ -2533,5 +2537,53 @@ export class FroalaOptionsBuilder {
   }
   get language(): Froala.Language {
     return this._language;
+  }
+
+  /**
+   * The distance in pixels from the left or right of an element at which to show the line-breaker.
+   *
+   * [Require plugin]	line_breaker.min.js
+   *
+   * @param {number} value
+   * @return {FroalaOptionsBuilder}
+   */
+  LineBreakerHorizontalOffset(value: number): FroalaOptionsBuilder {
+    this._lineBreakerHorizontalOffset = value;
+    return this;
+  }
+  get lineBreakerHorizontalOffset(): number {
+    return this._lineBreakerHorizontalOffset;
+  }
+
+  /**
+   * The distance in pixels from the top or bottom of an element at which to show the line-breaker.
+   *
+   * [Require plugin]	line_breaker.min.js
+   *
+   * @param {number} value
+   * @return {FroalaOptionsBuilder}
+   */
+  LineBreakerOffset(value: number): FroalaOptionsBuilder {
+    this._lineBreakerOffset = value;
+    return this;
+  }
+  get lineBreakerOffset(): number {
+    return this._lineBreakerOffset;
+  }
+
+  /**
+   * The list of HTML tags between which the line-breaker should appear.
+   *
+   * [Require plugin]	line_breaker.min.js
+   *
+   * @param {string[]} values
+   * @return {FroalaOptionsBuilder}
+   */
+  LineBreakerTags(values: string[]): FroalaOptionsBuilder {
+    this._lineBreakerTags = values;
+    return this;
+  }
+  get lineBreakerTags(): string[] {
+    return this._lineBreakerTags;
   }
 }
