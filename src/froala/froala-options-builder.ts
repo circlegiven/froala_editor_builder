@@ -172,6 +172,20 @@ export class FroalaOptionsBuilder {
   private _lineBreakerHorizontalOffset: number;
   private _lineBreakerOffset: number;
   private _lineBreakerTags: string[];
+  // Link
+  private _linkAlwaysBlank: boolean;
+  private _linkAlwaysNoFollow: boolean;
+  private _linkAttributes: object;
+  private _linkAutoPrefix: string;
+  private _linkConvertEmailAddress: boolean;
+  private _linkEditButtons: string[];
+  private _linkInsertButtons: string[];
+  private _linkList: object[];
+  private _linkMultipleStyles: boolean;
+  private _linkNoOpener: boolean;
+  private _linkNoReferrer: boolean;
+  private _linkStyles: object;
+  private _linkText: boolean;
 
   /**
    * You must call this method at last
@@ -2585,5 +2599,214 @@ export class FroalaOptionsBuilder {
   }
   get lineBreakerTags(): string[] {
     return this._lineBreakerTags;
+  }
+
+  /**
+   * When enabled, all links open in a new tab and no option to set this action would be presented in the UI.
+   *
+   * [Require plugin]	link.min.js
+   *
+   * @param {boolean} value
+   * @return {FroalaOptionsBuilder}
+   */
+  LinkAlwaysBlank(value: boolean): FroalaOptionsBuilder {
+    this._linkAlwaysBlank = value;
+    return this;
+  }
+  get linkAlwaysBlank(): boolean {
+    return this._linkAlwaysBlank;
+  }
+
+  /**
+   * Specifies if the rel="nofollow" attribute should be added on all links.
+   *
+   * [Require plugin]	link.min.js
+   *
+   * @param {boolean} value
+   * @return {FroalaOptionsBuilder}
+   */
+  LinkAlwaysNoFollow(value: boolean): FroalaOptionsBuilder {
+    this._linkAlwaysNoFollow = value;
+    return this;
+  }
+  get linkAlwaysNoFollow(): boolean {
+    return this._linkAlwaysNoFollow;
+  }
+
+  /**
+   * An object with additional attributes that could be customized for a link.
+   *
+   * [Require plugin]	link.min.js
+   *
+   * @param {object} value
+   * @return {FroalaOptionsBuilder}
+   */
+  LinkAttributes(value: object): FroalaOptionsBuilder {
+    this._linkAttributes = value;
+    return this;
+  }
+  get linkAttributes(): object {
+    return this._linkAttributes;
+  }
+
+  /**
+   * Sets the default URL prefix.
+   *
+   * [Require plugin]	link.min.js
+   *
+   * @param {string} value
+   * @return {FroalaOptionsBuilder}
+   */
+  LinkAutoPrefix(value: string): FroalaOptionsBuilder {
+    this._linkAutoPrefix = value;
+    return this;
+  }
+  get linkAutoPrefix(): string {
+    return this._linkAutoPrefix;
+  }
+
+  /**
+   * Email addresses inserted as link are converted to 'mailto:' links.
+   *
+   * [Require plugin]	link.min.js
+   *
+   * @param {boolean} value
+   * @return {FroalaOptionsBuilder}
+   */
+  LinkConvertEmailAddress(value: boolean): FroalaOptionsBuilder {
+    this._linkConvertEmailAddress = value;
+    return this;
+  }
+  get linkConvertEmailAddress(): boolean {
+    return this._linkConvertEmailAddress;
+  }
+
+  /**
+   * The list of buttons that appear in the edit link popup, when clicking on an existing link from the editor.
+   *
+   * [Require plugin]	link.min.js
+   *
+   * @param {string[]} values
+   * @return {FroalaOptionsBuilder}
+   */
+  LinkEditButtons(values: string[]): FroalaOptionsBuilder {
+    this._linkEditButtons = values;
+    return this;
+  }
+  get linkEditButtons(): string[] {
+    return this._linkEditButtons;
+  }
+
+  /**
+   * The list of buttons that appear in the insert link popup, when inserting a new link into the WYSIWYG editor.
+   *
+   * [Require plugin]	link.min.js
+   *
+   * @param {string[]} values
+   * @return {FroalaOptionsBuilder}
+   */
+  LinkInsertButtons(values: string[]): FroalaOptionsBuilder {
+    this._linkInsertButtons = values;
+    return this;
+  }
+  get linkInsertButtons(): string[] {
+    return this._linkInsertButtons;
+  }
+
+  /**
+   * Set a predefined list of links to select from when inserting or editing a link.
+   *
+   * [Require plugin]	link.min.js
+   *
+   * @param {object[]} values
+   * @return {FroalaOptionsBuilder}
+   */
+  LinkList(values: object[]): FroalaOptionsBuilder {
+    this._linkList = values;
+    return this;
+  }
+  get linkList(): object[] {
+    return this._linkList;
+  }
+
+  /**
+   * Allows multiple link styles to be selected at a time.
+   *
+   * [Require plugin]	link.min.js
+   *
+   * @param {boolean} value
+   * @return {FroalaOptionsBuilder}
+   */
+  LinkMultipleStyles(value: boolean): FroalaOptionsBuilder {
+    this._linkMultipleStyles = value;
+    return this;
+  }
+  get linkMultipleStyles(): boolean {
+    return this._linkMultipleStyles;
+  }
+
+  /**
+   * Disables adding the 'noopener' attribute when link is set to open in a new tab.
+   *
+   * [Require plugin]	link.min.js
+   *
+   * @param {boolean} value
+   * @return {FroalaOptionsBuilder}
+   */
+  LinkNoOpener(value: boolean): FroalaOptionsBuilder {
+    this._linkNoOpener = value;
+    return this;
+  }
+  get linkNoOpener(): boolean {
+    return this._linkNoOpener;
+  }
+
+  /**
+   * Disables adding the 'noreferrer' attribute when link is set to open in a new tab.
+   *
+   * [Require plugin]	link.min.js
+   *
+   * @param {boolean} value
+   * @return {FroalaOptionsBuilder}
+   */
+  LinkNoReferrer(value: boolean): FroalaOptionsBuilder {
+    this._linkNoReferrer = value;
+    return this;
+  }
+  get linkNoReferrer(): boolean {
+    return this._linkNoReferrer;
+  }
+
+  /**
+   * Set custom styles for the selected link.
+   * The classes should be defined in CSS, otherwise no changes will be visible on the link's appearance.
+   *
+   * [Require plugin]	link.min.js
+   *
+   * @param {object} value
+   * @return {FroalaOptionsBuilder}
+   */
+  LinkStyles(value: object): FroalaOptionsBuilder {
+    this._linkStyles = value;
+    return this;
+  }
+  get linkStyles(): object {
+    return this._linkStyles;
+  }
+
+  /**
+   * This option allows to edit the link text inside the edit link popup.
+   *
+   * [Require plugin]	link.min.js
+   *
+   * @param {boolean} value
+   * @return {FroalaOptionsBuilder}
+   */
+  LinkText(value: boolean): FroalaOptionsBuilder {
+    this._linkText = value;
+    return this;
+  }
+  get linkText(): boolean {
+    return this._linkText;
   }
 }

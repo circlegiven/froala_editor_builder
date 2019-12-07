@@ -280,6 +280,20 @@ export namespace Froala {
     lineBreakerHorizontalOffset: number;
     lineBreakerOffset: number;
     lineBreakerTags: string[];
+    // Link
+    linkAlwaysBlank: boolean;
+    linkAlwaysNoFollow: boolean;
+    linkAttributes: object;
+    linkAutoPrefix: string;
+    linkConvertEmailAddress: boolean;
+    linkEditButtons: string[];
+    linkInsertButtons: string[];
+    linkList: object[];
+    linkMultipleStyles: boolean;
+    linkNoOpener: boolean;
+    linkNoReferrer: boolean;
+    linkStyles: object;
+    linkText: boolean;
 
     constructor(builder: FroalaOptionsBuilder) {
       if (!_.isNil(builder.key)) {
@@ -727,6 +741,46 @@ export namespace Froala {
       if (!_.isNil(builder.lineBreakerTags)) {
         this.lineBreakerTags = builder.lineBreakerTags;
       }
+      if (!_.isNil(builder.linkAlwaysBlank)) {
+        this.linkAlwaysBlank = builder.linkAlwaysBlank;
+      }
+      if (!_.isNil(builder.linkAlwaysNoFollow)) {
+        this.linkAlwaysNoFollow = builder.linkAlwaysNoFollow;
+      }
+      if (!_.isNil(builder.linkAttributes)) {
+        this.linkAttributes = builder.linkAttributes;
+      }
+      if (!_.isNil(builder.linkAutoPrefix)) {
+        this.linkAutoPrefix = builder.linkAutoPrefix;
+      }
+      if (!_.isNil(builder.linkConvertEmailAddress)) {
+        this.linkConvertEmailAddress = builder.linkConvertEmailAddress;
+      }
+      if (!_.isNil(builder.linkEditButtons)) {
+        this.linkEditButtons = builder.linkEditButtons;
+      }
+      if (!_.isNil(builder.linkInsertButtons)) {
+        this.linkInsertButtons = builder.linkInsertButtons;
+      }
+      if (!_.isNil(builder.linkList)) {
+        this.linkList = builder.linkList;
+      }
+      if (!_.isNil(builder.linkMultipleStyles)) {
+        this.linkMultipleStyles = builder.linkMultipleStyles;
+      }
+      if (!_.isNil(builder.linkNoOpener)) {
+        this.linkNoOpener = builder.linkNoOpener;
+      }
+      if (!_.isNil(builder.linkNoReferrer)) {
+        this.linkNoReferrer = builder.linkNoReferrer;
+      }
+      if (!_.isNil(builder.linkStyles)) {
+        this.linkStyles = builder.linkStyles;
+      }
+      if (!_.isNil(builder.linkText)) {
+        this.linkText = builder.linkText;
+      }
+
     }
   }
 }
