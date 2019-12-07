@@ -74,6 +74,45 @@ export namespace Froala {
     VIDEO = 'video',
     WORD_PASTE = 'wordPaste',
   }
+  export enum Language {
+    AR = 'ar',
+    BS = 'bs',
+    CS = 'cs',
+    DA = 'da',
+    DE = 'de',
+    EL = 'el',
+    EN_CA = 'en_ca',
+    EN_GB = 'en_gb',
+    ES = 'es',
+    ET = 'et',
+    FA = 'fa',
+    FI = 'fi',
+    HE = 'he',
+    HR = 'hr',
+    HU = 'hu',
+    ID = 'id',
+    IT = 'it',
+    JA = 'ja',
+    KO = 'ko',
+    KU = 'ku',
+    ME = 'me',
+    NB = 'nb',
+    NL = 'nl',
+    PL = 'pl',
+    PT_BR = 'pt_br',
+    PT_PT = 'pt_pt',
+    RO = 'ro',
+    RU = 'ru',
+    SK = 'sk',
+    SR = 'sr',
+    SV = 'sv',
+    TH = 'th',
+    TR = 'tr',
+    UK = 'uk',
+    VI = 'vi',
+    ZH_CN = 'zh_cn',
+    ZH_TW = 'zh_tw',
+  }
   export class Options {
     // License key
     key: string;
@@ -231,6 +270,12 @@ export namespace Froala {
     imageManagerPreloader: string;
     imageManagerScrollOffset: number;
     imageManagerToggleTags: boolean;
+    // Inline Style
+    inlineStyles: object;
+    // Inline Class
+    inlineClasses: object;
+    // Language
+    language: Language;
 
     constructor(builder: FroalaOptionsBuilder) {
       if (!_.isNil(builder.key)) {
@@ -659,6 +704,15 @@ export namespace Froala {
       }
       if (!_.isNil(builder.imageManagerToggleTags)) {
         this.imageManagerToggleTags = builder.imageManagerToggleTags;
+      }
+      if (!_.isNil(builder.inlineStyles)) {
+        this.inlineStyles = builder.inlineStyles;
+      }
+      if (!_.isNil(builder.inlineClasses)) {
+        this.inlineClasses = builder.inlineClasses;
+      }
+      if (!_.isNil(builder.language)) {
+        this.language = builder.language;
       }
     }
   }

@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
       .FontSize(['1','5','10'])
       .Attribution(false)
       .CharCounterCount(true)
+      .Language(Froala.Language.KO)
       .build();
     console.log(this.froalaOptions);
   }

@@ -162,6 +162,12 @@ export class FroalaOptionsBuilder {
   private _imageManagerPreloader: string;
   private _imageManagerScrollOffset: number;
   private _imageManagerToggleTags: boolean;
+  // Inline Style
+  private _inlineStyles: object;
+  // Inline Class
+  private _inlineClasses: object;
+  // Language
+  private _language: Froala.Language;
 
   /**
    * You must call this method at last
@@ -2477,5 +2483,55 @@ export class FroalaOptionsBuilder {
   }
   get imageManagerToggleTags(): boolean {
     return this._imageManagerToggleTags;
+  }
+
+  /**
+   * Set custom styles for the selected text.
+   * This option is an Object where the key is the name of the new style that appears in the dropdown and the value specifies the CSS properties for it.
+   *
+   * [Require plugin] inline_style.min.js
+   *
+   * @param {object} value
+   * @return {FroalaOptionsBuilder}
+   */
+  InlineStyles(value: object): FroalaOptionsBuilder {
+    this._inlineStyles = value;
+    return this;
+  }
+  get inlineStyles(): object {
+    return this._inlineStyles;
+  }
+
+  /**
+   * Set custom classes for the selected text.
+   * This option is an Object where the key is the name of the new class that appears in the dropdown and the value specifies the class name for it.
+   *
+   * [Require plugin] inline_class.min.js
+   *
+   * @param {object} value
+   * @return {FroalaOptionsBuilder}
+   */
+  InlineClasses(value: object): FroalaOptionsBuilder {
+    this._inlineClasses = value;
+    return this;
+  }
+  get inlineClasses(): object {
+    return this._inlineClasses;
+  }
+
+  /**
+   * Select the language to be used in the rich text editor's interface.
+   *
+   * [Require plugin] /languages/*.js
+   *
+   * @param {Froala.Language} value
+   * @return {FroalaOptionsBuilder}
+   */
+  Language(value: Froala.Language): FroalaOptionsBuilder {
+    this._language = value;
+    return this;
+  }
+  get language(): Froala.Language {
+    return this._language;
   }
 }
