@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Froala} from "../froala/froala";
+import {Froala, FroalaOptionsBuilder} from "../froala";
 
 @Component({
   selector: 'app-root',
@@ -9,11 +9,11 @@ import {Froala} from "../froala/froala";
 export class AppComponent implements OnInit {
   title = 'Froala editor builder';
   editorContents: string;
-  froalaOptions;
+  froalaOptions: Froala.Options;
 
   ngOnInit(): void {
     // set froala editor options
-    this.froalaOptions = new Froala.OptionsBuilder()
+    this.froalaOptions = new FroalaOptionsBuilder()
       .FontSize(['1','5','10'])
       .Attribution(false)
       .build();
