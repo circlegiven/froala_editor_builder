@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
     // set froala editor options
     this.froalaOptions = new Froala.OptionsBuilder()
       .FontSize(['1','5','10'])
+      .Attribution(false)
       .build();
     console.log(this.froalaOptions);
   }
