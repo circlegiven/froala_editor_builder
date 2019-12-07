@@ -3,6 +3,9 @@ import {Froala} from "./froala";
 export class FroalaOptionsBuilder {
   // License key
   private _key: string;
+  // Char Counter
+  private _charCounterCount: boolean;
+  private _charCounterMax: number;
   // Colors
   private _colorsBackground: string[];
   private _colorsButtons: string[];
@@ -162,6 +165,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * You must call this method at last
+   *
    * @return {Froala.Options}
    */
   build(): Froala.Options {
@@ -170,6 +174,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * License key
+   *
    * @param {string} value
    * @return {FroalaOptionsBuilder}
    */
@@ -182,9 +187,44 @@ export class FroalaOptionsBuilder {
   }
 
   /**
+   * Enables or disables the display of the character counter.
+   *
+   * [Require plugin] char_counter.min.js
+   *
+   * @param {boolean} value
+   * @return {FroalaOptionsBuilder}
+   */
+  CharCounterCount(value: boolean): FroalaOptionsBuilder {
+    this._charCounterCount = value;
+    return this;
+  }
+  get charCounterCount(): boolean {
+    return this._charCounterCount;
+  }
+
+  /**
+   * The maximum number of characters allowed to be inserted into the rich text editor.
+   * '-1' means that there is not limit set.
+   *
+   * [Require plugin] char_counter.min.js
+   *
+   * @param {number} value
+   * @return {FroalaOptionsBuilder}
+   */
+  CharCounterMax(value: number): FroalaOptionsBuilder {
+    this._charCounterMax = value;
+    return this;
+  }
+  get charCounterMax(): number {
+    return this._charCounterMax;
+  }
+
+  /**
    * An array of colors used in the colors popup for background.
    * Passing REMOVE as a value in the array will display the Clear Formatting button for colors.
+   *
    * [Require plugin] colors.min.js
+   *
    * @param {string[]} values
    * @return {FroalaOptionsBuilder}
    */
@@ -198,7 +238,9 @@ export class FroalaOptionsBuilder {
 
   /**
    * Set the buttons the colors popup.
+   *
    * [Require plugin] colors.min.js
+   *
    * @param {string[]} values
    * @return {FroalaOptionsBuilder}
    */
@@ -212,7 +254,9 @@ export class FroalaOptionsBuilder {
 
   /**
    * Show HEX input to choose custom color.
+   *
    * [Require plugin] colors.min.js
+   *
    * @param {boolean} value
    * @return {FroalaOptionsBuilder}
    */
@@ -226,7 +270,9 @@ export class FroalaOptionsBuilder {
 
   /**
    * The number of colors displayed on a line in the colors popup.
+   *
    * [Require plugin] colors.min.js
+   *
    * @param {number} value
    * @return {FroalaOptionsBuilder}
    */
@@ -241,7 +287,9 @@ export class FroalaOptionsBuilder {
   /**
    * An array of colors used in the colors popup for text.
    * Passing REMOVE as a value in the array will display the Clear Formatting button for colors.
+   *
    * [Require plugin] colors.min.js
+   *
    * @param {string[]} values
    * @return {FroalaOptionsBuilder}
    */
@@ -256,7 +304,9 @@ export class FroalaOptionsBuilder {
   /**
    * Specifies how the dragged elements should be placed in the new position.
    * When this option is disabled, the dragged elements are placed between block tags and not inside them.
+   *
    * [Require plugin] draggable.min.js
+   *
    * @param {boolean} value
    * @return {FroalaOptionsBuilder}
    */
@@ -270,7 +320,9 @@ export class FroalaOptionsBuilder {
 
   /**
    * Your key from Embed.ly to remove the "Powered By Banner".
+   *
    * [Require plugin] embedly.min.js
+   *
    * @param {string} value
    * @return {FroalaOptionsBuilder}
    */
@@ -284,7 +336,9 @@ export class FroalaOptionsBuilder {
 
   /**
    * The buttons that appear in the edit Embed.ly popup, when an embedded object is selected.
+   *
    * [Require plugin] video.min.js
+   *
    * @param {string[]} values
    * @return {FroalaOptionsBuilder}
    */
@@ -298,7 +352,9 @@ export class FroalaOptionsBuilder {
 
   /**
    * The buttons that appear in the insert Embed.ly popup, when an embeded object is inserted into the WYSIWYG editor.
+   *
    * [Require plugin] embedly.min.js
+   *
    * @param {string[]} values
    * @return {FroalaOptionsBuilder}
    */
@@ -312,7 +368,9 @@ export class FroalaOptionsBuilder {
 
   /**
    * The default script path for the Embedly JS.
+   *
    * [Require plugin] embedly.min.js
+   *
    * @param {string} value
    * @return {FroalaOptionsBuilder}
    */
@@ -326,7 +384,9 @@ export class FroalaOptionsBuilder {
 
   /**
    * Buttons set for emoticons popup.
+   *
    * [Require plugin] emoticons.min.js
+   *
    * @param {string[]} values
    * @return {FroalaOptionsBuilder}
    */
@@ -341,7 +401,9 @@ export class FroalaOptionsBuilder {
   /**
    * An array of emoticons available in the insert emoticon popup.
    * Each emoticon is defined by an Object containing the code and description of each emoticon.
+   *
    * [Require plugin] emoticons.min.js
+   *
    * @param {object[]} values
    * @return {FroalaOptionsBuilder}
    */
@@ -355,7 +417,9 @@ export class FroalaOptionsBuilder {
 
   /**
    * Use EmojiOne svg images instead of Unicode text.
+   *
    * [Require plugin] emoticons.min.js
+   *
    * @param {boolean} value
    * @return {FroalaOptionsBuilder}
    */
@@ -369,7 +433,9 @@ export class FroalaOptionsBuilder {
 
   /**
    * The number of emoticons displayed on a line in the insert emoticon popup.
+   *
    * [Require plugin] emoticons.min.js
+   *
    * @param {number} value
    * @return {FroalaOptionsBuilder}
    */
@@ -384,7 +450,9 @@ export class FroalaOptionsBuilder {
   /**
    * A list with the characters that are reserved in HTML.
    * More details about using entities in HTML can be found on W3C and Wikipedia.
+   *
    * [Require plugin] entities.min.js
+   *
    * @param {string} value
    * @return {FroalaOptionsBuilder}
    */
@@ -399,7 +467,9 @@ export class FroalaOptionsBuilder {
   /**
    * The list of file types that are allowed to be uploaded.
    * Although this will restrict uploading other types of files, we strongly recommend you to check the file type on the server too.
+   *
    * [Require plugin] file.min.js
+   *
    * @param {string[]} values
    * @return {FroalaOptionsBuilder}
    */
@@ -413,7 +483,9 @@ export class FroalaOptionsBuilder {
 
   /**
    * The list of buttons that appear in the insert file popup, when inserting a new file into the WYSIWYG editor.
+   *
    * [Require plugin] file.min.js
+   *
    * @param {string[]} values
    * @return {FroalaOptionsBuilder}
    */
@@ -429,7 +501,9 @@ export class FroalaOptionsBuilder {
    * The maximum file size allowed on upload in bytes.
    * The default value is 10MB.
    * Although this makes an additional check before uploading the file, it is highly recommended to check file size on your server too.
+   *
    * [Require plugin] file.min.js
+   *
    * @param {number} value
    * @return {FroalaOptionsBuilder}
    */
@@ -443,7 +517,9 @@ export class FroalaOptionsBuilder {
 
   /**
    * Enable or disable file upload.
+   *
    * [Require plugin] file.min.js
+   *
    * @param {boolean} value
    * @return {FroalaOptionsBuilder}
    */
@@ -457,7 +533,9 @@ export class FroalaOptionsBuilder {
 
   /**
    * The HTTP file upload request type.
+   *
    * [Require plugin] file.min.js
+   *
    * @param {Froala.HttpMethod} value
    * @return {FroalaOptionsBuilder}
    */
@@ -471,7 +549,9 @@ export class FroalaOptionsBuilder {
 
   /**
    * Customize the name of the parameter that contains the file in the upload request.
+   *
    * [Require plugin] file.min.js
+   *
    * @param {string} value
    * @return {FroalaOptionsBuilder}
    */
@@ -485,7 +565,9 @@ export class FroalaOptionsBuilder {
 
   /**
    * Pass additional parameters to the file upload request.
+   *
    * [Require plugin] file.min.js
+   *
    * @param {object} value
    * @return {FroalaOptionsBuilder}
    */
@@ -501,9 +583,11 @@ export class FroalaOptionsBuilder {
    * Set the options for file upload to S3.
    * All the fields from the example below are required.
    * Also make sure that you have enabled CORS on Amazon.
+   *
    * Note: 'uploadURL' property can be used instead of 'bucket' and 'region' properties to specify a custom URL from Amazon where to upload the image.
    *
    * [Require plugin] file.min.js
+   *
    * @param {object} value
    * @return {FroalaOptionsBuilder}
    */
@@ -520,11 +604,14 @@ export class FroalaOptionsBuilder {
    * When a file is uploaded, the editor sends the file to the server through a HTTP request.
    * The server should process the data from the file parameter of the request and return a JSON object containing a link field with the link to the uploaded file.
    * More details can be found in the File Upload concept article.
+   *
    * E.g. {link: 'path/to/file.pdf'}.
+   *
    * Note 1: By default, the files are stored on our servers, but if you want to have full control over them, you should consider implementing the upload on your server. The files stored on our servers, may be deleted at any time without any notice.
    * Note 2: If the domain where the file is saved is not the same with the one where the editor is running, you may need to enable requestWithCORS option and make specific customizations on the server. For more information please refer to Cross-origin resource sharing.
    *
    * [Require plugin] file.min.js
+   *
    * @param {string} value
    * @return {FroalaOptionsBuilder}
    */
@@ -540,6 +627,7 @@ export class FroalaOptionsBuilder {
    * Enables using the file's name instead of the selected text when a file is inserted.
    *
    * [Require plugin] file.min.js
+   *
    * @param {boolean} value
    * @return {FroalaOptionsBuilder}
    */
@@ -555,6 +643,7 @@ export class FroalaOptionsBuilder {
    * Defines the fonts that appear under the Font Family button from the rich text editor's toolbar.
    *
    * [Require plugin] font_family.min.js
+   *
    * @param {object} value
    * @return {FroalaOptionsBuilder}
    */
@@ -570,6 +659,7 @@ export class FroalaOptionsBuilder {
    * The text to display when the font family is unkown or nothing is selected.
    *
    * [Require plugin] font_family.min.js
+   *
    * @param {string} value
    * @return {FroalaOptionsBuilder}
    */
@@ -585,6 +675,7 @@ export class FroalaOptionsBuilder {
    * The Font Family button from the WYSIWYG editor's toolbar is replaced with a dropdown showing the actual font family name for the current text selection.
    *
    * [Require plugin] font_family.min.js
+   *
    * @param {boolean} value
    * @return {FroalaOptionsBuilder}
    */
@@ -600,6 +691,7 @@ export class FroalaOptionsBuilder {
    * The Font Size button from the WYSIWYG editor's toolbar is replaced with a dropdown showing the actual font size value for the current text selection.
    *
    * [Require plugin] font_size.min.js
+   *
    * @param {boolean} value
    * @return {FroalaOptionsBuilder}
    */
@@ -615,6 +707,7 @@ export class FroalaOptionsBuilder {
    * Defines the font sizes that appear under the Font Size button from the rich text editor's toolbar.
    *
    * [Require plugin] font_size.min.js
+   *
    * @param {string[]} values
    * @return {FroalaOptionsBuilder}
    */
@@ -630,6 +723,7 @@ export class FroalaOptionsBuilder {
    * The text to display when the font size is unkown or nothing is selected.
    *
    * [Require plugin] font_size.min.js
+   *
    * @param {string} value
    * @return {FroalaOptionsBuilder}
    */
@@ -645,6 +739,7 @@ export class FroalaOptionsBuilder {
    * The unit to be used for the font size.
    *
    * [Require plugin] font_size.min.js
+   *
    * @param {string} value
    * @return {FroalaOptionsBuilder}
    */
@@ -660,6 +755,7 @@ export class FroalaOptionsBuilder {
    * Buttons for form edit popup.
    *
    * [Require plugin]	form.min.js
+   *
    * @param {string[]} values
    * @return {FroalaOptionsBuilder}
    */
@@ -675,6 +771,7 @@ export class FroalaOptionsBuilder {
    * To enable applying multiple css on form elements.
    *
    * [Require plugin]	form.min.js
+   *
    * @param {boolean} value
    * @return {FroalaOptionsBuilder}
    */
@@ -690,6 +787,7 @@ export class FroalaOptionsBuilder {
    * Options for applying styles on form.
    *
    * [Require plugin]	form.min.js
+   *
    * @param {object} value
    * @return {FroalaOptionsBuilder}
    */
@@ -705,6 +803,7 @@ export class FroalaOptionsBuilder {
    * Buttons for form popup.
    *
    * [Require plugin]	form.min.js
+   *
    * @param {string[]} values
    * @return {FroalaOptionsBuilder}
    */
@@ -833,6 +932,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * Allows the usage of HTML, HEAD, BODY tags and DOCTYPE declaration.
+   *
    * Note: Enabling this option will automatically enables the iframe option.
    *
    * @param {boolean} value
@@ -1663,6 +1763,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * An object of items to show in the help modal.
+   *
    * [Require plugin] help.min.js
    *
    * @param {object[]} values
@@ -1679,6 +1780,7 @@ export class FroalaOptionsBuilder {
   /**
    * The list of image types that are allowed to be uploaded.
    * Although this will restrict uploading other types of files, we strongly recommend you to check the file type on the server too.
+   *
    * [Require plugin] image.min.js
    *
    * @param {Froala.ImageType[]} values
@@ -1694,6 +1796,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * The list of buttons that appear in the edit image alternate text popup, when changing the alternate text of the image.
+   *
    * [Require plugin] image.min.js
    *
    * @param {string[]} values
@@ -1711,6 +1814,7 @@ export class FroalaOptionsBuilder {
    * Proxy server to be used for reading images inserted by URL and upload them to a custom server.
    * By default we provide a proxy hosted on our servers,
    * however for full control, we recommend setting up your own proxy by using the details from CORS Anywhere. (https://github.com/Rob--W/cors-anywhere)
+   *
    * [Require plugin] image.min.js
    *
    * @param {string} value
@@ -1726,6 +1830,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * Sets the default image alignment when it is inserted in the rich text editor.
+   *
    * [Require plugin] image.min.js
    *
    * @param {Froala.ImageAlign} value
@@ -1741,6 +1846,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * Sets the default display for an image when is is inserted in the rich text.
+   *
    * [Require plugin] image.min.js
    *
    * @param {Froala.ImageDisplay} value
@@ -1757,6 +1863,7 @@ export class FroalaOptionsBuilder {
   /**
    * Sets the default width of the image when it is inserted in the rich text editor.
    * Setting it to 0 will not set any width.
+   *
    * [Require plugin] image.min.js
    *
    * @param {number} value
@@ -1773,6 +1880,7 @@ export class FroalaOptionsBuilder {
   /**
    * Sets the default width of the image when it is inserted in the rich text editor.
    * Setting it to 0 will not set any width.
+   *
    * [Require plugin] image.min.js
    *
    * @param {number} value
@@ -1789,6 +1897,7 @@ export class FroalaOptionsBuilder {
   /**
    * The list of buttons that appear in the edit image popup, when an image is selected.
    * If Image Aviary plugin is included, then 'aviary' can be used as an option as well.
+   *
    * [Require plugin] image.min.js
    *
    * @param {string[]} values
@@ -1804,6 +1913,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * The list of buttons that appear in the insert image popup, when inserting a new image into the WYSIWYG editor.
+   *
    * [Require plugin] image.min.js
    *
    * @param {string[]} values
@@ -1821,6 +1931,7 @@ export class FroalaOptionsBuilder {
    * The maximum image size allowed on upload in bytes.
    * The default value is 10MB.
    * Although this makes an additional check before uploading the image, it is highly recommended to check image size on your server too.
+   *
    * [Require plugin] image.min.js
    *
    * @param {number} value
@@ -1836,6 +1947,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * The minimum width in PX the image can be resized to.
+   *
    * [Require plugin] image.min.js
    *
    * @param {number} value
@@ -1852,6 +1964,7 @@ export class FroalaOptionsBuilder {
   /**
    * Allows changing the position of the images by dragging them.
    * This option will work correctly only when including the draggable plugin.
+   *
    * [Require plugin] image.min.js
    *
    * @param {boolean} value
@@ -1867,6 +1980,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * Allows multiple image styles to be selected at a time.
+   *
    * [Require plugin] image.min.js
    *
    * @param {boolean} value
@@ -1882,6 +1996,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * Allows pasting images from clipboard.
+   *
    * [Require plugin] image.min.js
    *
    * @param {boolean} value
@@ -1897,6 +2012,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * Use default image settings for pasted images.
+   *
    * [Require plugin] image.min.js
    *
    * @param {boolean} value
@@ -1912,6 +2028,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * Disables image resize when set to 'false'.
+   *
    * [Require plugin] image.min.js
    *
    * @param {boolean} value
@@ -1928,6 +2045,7 @@ export class FroalaOptionsBuilder {
   /**
    * By default the image resize is using PX.
    * Enabling this option will use % instead when resizing an image inside the editor.
+   *
    * [Require plugin] image.min.js
    *
    * @param {boolean} value
@@ -1943,6 +2061,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * Force image percent to round to integer while resizing.
+   *
    * [Require plugin] image.min.js
    *
    * @param {boolean} value
@@ -1958,6 +2077,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * When this option is enabled, the images will get the width and height set as attribute in the output.
+   *
    * [Require plugin] image.min.js
    *
    * @param {boolean} value
@@ -1973,6 +2093,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * The list of buttons that appear in the edit image size popup, when editing the image's width and height.
+   *
    * [Require plugin] image.min.js
    *
    * @param {string[]} values
@@ -1988,6 +2109,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * Enables splitting the HTML when inserting a new image.
+   *
    * [Require plugin] image.min.js
    *
    * @param {boolean} value
@@ -2004,6 +2126,7 @@ export class FroalaOptionsBuilder {
   /**
    * Set custom styles for the selected image.
    * The classes should be defined in CSS, otherwise no changes will be visible on the image's appearance.
+   *
    * [Require plugin] image.min.js
    *
    * @param {object} value
@@ -2019,6 +2142,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * Set options for TUI editor plugin.
+   *
    * [Require plugin] image.min.js
    *
    * @param {object} value
@@ -2035,6 +2159,7 @@ export class FroalaOptionsBuilder {
   /**
    * Allows text near an image when it is aligned to the left or to the right.
    * Disabling this option will make the display button for image editor popup unavailable.
+   *
    * [Require plugin] image.min.js
    *
    * @param {boolean} value
@@ -2050,6 +2175,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * Enable or disable image upload.
+   *
    * [Require plugin] image.min.js
    *
    * @param {boolean} value
@@ -2065,6 +2191,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * Add new line after inserting an image when enabled.
+   *
    * [Require plugin] image.min.js
    *
    * @param {boolean} value
@@ -2080,6 +2207,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * The HTTP image upload request type.
+   *
    * [Require plugin] image.min.js
    *
    * @param {Froala.HttpMethod} value
@@ -2095,6 +2223,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * Customize the name of the parameter that contains the image file in the upload request.
+   *
    * [Require plugin] image.min.js
    *
    * @param {string} value
@@ -2110,6 +2239,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * Pass additional parameters to the upload request.
+   *
    * [Require plugin] image.min.js
    *
    * @param {object} value
@@ -2125,6 +2255,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * Upload images inserted by URL to custom server instead of linking them by URL.
+   *
    * [Require plugin] image.min.js
    *
    * @param {boolean} value
@@ -2142,7 +2273,9 @@ export class FroalaOptionsBuilder {
    * Set the options for image upload to S3.
    * All the fields from the example below are required.
    * Also make sure that you have enabled CORS on Amazon. (https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html)
+   *
    * Note: 'uploadURL' property can be used instead of bucket and region properties to specify a custom URL from Amazon where to upload the image.
+   *
    * [Require plugin] image.min.js
    *
    * @param {object} value
@@ -2160,6 +2293,7 @@ export class FroalaOptionsBuilder {
    * The URL where the images uploaded by the user are saved. When an image is uploaded, the editor sends the file to the server through a HTTP request.
    * The server should process the data from the 'file' parameter of the request and return a JSON object containing a 'link' field with the link to the uploaded image.
    * More details can be found in the Image Upload concept article. (https://www.froala.com/wysiwyg-editor/docs/concepts/image/upload)
+   *
    * E.g. {link: 'path/to/image.jpg'}.
    *
    * Note 1: By default, the images are stored on our servers, but if you want to have full control over them, you should consider implementing the upload on your server.
@@ -2184,6 +2318,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * The HTTP image manager delete image request type.
+   *
    * [Require plugin] image_manager.min.js
    *
    * @param {Froala.HttpMethod} value
@@ -2199,6 +2334,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * Additional parameters passed to the image manager image delete request.
+   *
    * [Require plugin] image_manager.min.js
    *
    * @param {object} value
@@ -2215,6 +2351,7 @@ export class FroalaOptionsBuilder {
   /**
    * The URL where the HTTP request is done to delete the image.
    * The request will contain the image source as src parameter.
+   *
    * [Require plugin] image_manager.min.js
    *
    * @param {string} value
@@ -2230,6 +2367,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * The HTTP image manager load images request type.
+   *
    * [Require plugin] image_manager.min.js
    *
    * @param {Froala.HttpMethod} value
@@ -2245,6 +2383,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * Additional parameters passed to the load images request from the image manager.
+   *
    * [Require plugin] image_manager.min.js
    *
    * @param {object} value
@@ -2261,6 +2400,7 @@ export class FroalaOptionsBuilder {
   /**
    * The URL where the HTTP request is done in order to load a page of images that appear in the image manager.
    * The response should be an array with an Object for each image (https://www.froala.com/wysiwyg-editor/docs/options#imageManagerLoadURL)
+   *
    * [Require plugin] image_manager.min.js
    *
    * @param {string} value
@@ -2276,6 +2416,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * The number of images loaded per page in the image manager.
+   *
    * [Require plugin] image_manager.min.js
    *
    * @param {number} value
@@ -2292,6 +2433,7 @@ export class FroalaOptionsBuilder {
   /**
    * The path to a gif image to be displayed while loading the images from the server in the image manager.
    * If no option is specified, "Loading.." text will appear.
+   *
    * [Require plugin] image_manager.min.js
    *
    * @param {string} value
@@ -2307,6 +2449,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * The distance in pixels from the bottom of the scrollable content at which to trigger the loading of the next page of images.
+   *
    * [Require plugin] image_manager.min.js
    *
    * @param {number} value
@@ -2322,6 +2465,7 @@ export class FroalaOptionsBuilder {
 
   /**
    * To enable/disable toggle of filter tags for image manager popup.
+   *
    * [Require plugin] image_manager.min.js
    *
    * @param {boolean} value

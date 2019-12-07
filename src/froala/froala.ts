@@ -77,6 +77,9 @@ export namespace Froala {
   export class Options {
     // License key
     key: string;
+    // Char Counter
+    charCounterCount: boolean;
+    charCounterMax: number;
     // Colors
     colorsBackground: string[];
     colorsButtons: string[];
@@ -232,6 +235,12 @@ export namespace Froala {
     constructor(builder: FroalaOptionsBuilder) {
       if (!_.isNil(builder.key)) {
         this.key = builder.key;
+      }
+      if (!_.isNil(builder.charCounterCount)) {
+        this.charCounterCount = builder.charCounterCount;
+      }
+      if (!_.isNil(builder.charCounterMax)) {
+        this.charCounterMax = builder.charCounterMax;
       }
       if (!_.isNil(builder.colorsBackground)) {
         this.colorsBackground = builder.colorsBackground;
