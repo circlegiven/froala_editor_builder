@@ -1,6 +1,8 @@
 import {Froala} from "./froala";
 
 export class FroalaOptionsBuilder {
+  // License key
+  private _key: string;
   // Colors
   private _colorsBackground: string[];
   private _colorsButtons: string[];
@@ -164,6 +166,19 @@ export class FroalaOptionsBuilder {
    */
   build(): Froala.Options {
     return new Froala.Options(this);
+  }
+
+  /**
+   * License key
+   * @param {string} value
+   * @return {FroalaOptionsBuilder}
+   */
+  Key(value: string): FroalaOptionsBuilder {
+    this._key = value;
+    return this;
+  }
+  get key(): string {
+    return this._key;
   }
 
   /**

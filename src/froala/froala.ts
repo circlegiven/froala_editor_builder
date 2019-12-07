@@ -75,6 +75,8 @@ export namespace Froala {
     WORD_PASTE = 'wordPaste',
   }
   export class Options {
+    // License key
+    key: string;
     // Colors
     colorsBackground: string[];
     colorsButtons: string[];
@@ -213,7 +215,7 @@ export namespace Froala {
     imageUploadParam: string;
     imageUploadParams: object;
     imageUploadRemoteUrls: boolean;
-    imageUploadToS3: boolean;
+    imageUploadToS3: object;
     imageUploadURL: string;
     // Image Manager
     imageManagerDeleteMethod: HttpMethod;
@@ -228,11 +230,14 @@ export namespace Froala {
     imageManagerToggleTags: boolean;
 
     constructor(builder: FroalaOptionsBuilder) {
+      if (!_.isNil(builder.key)) {
+        this.key = builder.key;
+      }
       if (!_.isNil(builder.colorsBackground)) {
-          this.colorsBackground = builder.colorsBackground;
+        this.colorsBackground = builder.colorsBackground;
       }
       if (!_.isNil(builder.colorsButtons)) {
-          this.colorsButtons = builder.colorsButtons;
+        this.colorsButtons = builder.colorsButtons;
       }
       if (!_.isNil(builder.colorsHEXInput)) {
         this.colorsHEXInput = builder.colorsHEXInput;
@@ -515,6 +520,136 @@ export namespace Froala {
       }
       if (!_.isNil(builder.zIndex)) {
         this.zIndex = builder.zIndex;
+      }
+
+      if (!_.isNil(builder.helpSets)) {
+        this.helpSets = builder.helpSets;
+      }
+      if (!_.isNil(builder.imageAllowedTypes)) {
+        this.imageAllowedTypes = builder.imageAllowedTypes;
+      }
+      if (!_.isNil(builder.imageAltButtons)) {
+        this.imageAltButtons = builder.imageAltButtons;
+      }
+      if (!_.isNil(builder.imageCORSProxy)) {
+        this.imageCORSProxy = builder.imageCORSProxy;
+      }
+      if (!_.isNil(builder.imageDefaultAlign)) {
+        this.imageDefaultAlign = builder.imageDefaultAlign;
+      }
+      if (!_.isNil(builder.imageDefaultDisplay)) {
+        this.imageDefaultDisplay = builder.imageDefaultDisplay;
+      }
+      if (!_.isNil(builder.imageDefaultMargin)) {
+        this.imageDefaultMargin = builder.imageDefaultMargin;
+      }
+      if (!_.isNil(builder.imageDefaultWidth)) {
+        this.imageDefaultWidth = builder.imageDefaultWidth;
+      }
+      if (!_.isNil(builder.imageEditButtons)) {
+        this.imageEditButtons = builder.imageEditButtons;
+      }
+      if (!_.isNil(builder.imageInsertButtons)) {
+        this.imageInsertButtons = builder.imageInsertButtons;
+      }
+      if (!_.isNil(builder.imageMaxSize)) {
+        this.imageMaxSize = builder.imageMaxSize;
+      }
+      if (!_.isNil(builder.imageMinWidth)) {
+        this.imageMinWidth = builder.imageMinWidth;
+      }
+      if (!_.isNil(builder.imageMove)) {
+        this.imageMove = builder.imageMove;
+      }
+      if (!_.isNil(builder.imageMultipleStyles)) {
+        this.imageMultipleStyles = builder.imageMultipleStyles;
+      }
+      if (!_.isNil(builder.imagePaste)) {
+        this.imagePaste = builder.imagePaste;
+      }
+      if (!_.isNil(builder.imagePasteProcess)) {
+        this.imagePasteProcess = builder.imagePasteProcess;
+      }
+      if (!_.isNil(builder.imageResize)) {
+        this.imageResize = builder.imageResize;
+      }
+      if (!_.isNil(builder.imageResizeWithPercent)) {
+        this.imageResizeWithPercent = builder.imageResizeWithPercent;
+      }
+      if (!_.isNil(builder.imageRoundPercent)) {
+        this.imageRoundPercent = builder.imageRoundPercent;
+      }
+      if (!_.isNil(builder.imageOutputSize)) {
+        this.imageOutputSize = builder.imageOutputSize;
+      }
+      if (!_.isNil(builder.imageSizeButtons)) {
+        this.imageSizeButtons = builder.imageSizeButtons;
+      }
+      if (!_.isNil(builder.imageSplitHTML)) {
+        this.imageSplitHTML = builder.imageSplitHTML;
+      }
+      if (!_.isNil(builder.imageStyles)) {
+        this.imageStyles = builder.imageStyles;
+      }
+      if (!_.isNil(builder.imageTUIOptions)) {
+        this.imageTUIOptions = builder.imageTUIOptions;
+      }
+      if (!_.isNil(builder.imageTextNear)) {
+        this.imageTextNear = builder.imageTextNear;
+      }
+      if (!_.isNil(builder.imageUpload)) {
+        this.imageUpload = builder.imageUpload;
+      }
+      if (!_.isNil(builder.imageAddNewLine)) {
+        this.imageAddNewLine = builder.imageAddNewLine;
+      }
+      if (!_.isNil(builder.imageUploadMethod)) {
+        this.imageUploadMethod = builder.imageUploadMethod;
+      }
+      if (!_.isNil(builder.imageUploadParam)) {
+        this.imageUploadParam = builder.imageUploadParam;
+      }
+      if (!_.isNil(builder.imageUploadParams)) {
+        this.imageUploadParams = builder.imageUploadParams;
+      }
+      if (!_.isNil(builder.imageUploadRemoteUrls)) {
+        this.imageUploadRemoteUrls = builder.imageUploadRemoteUrls;
+      }
+      if (!_.isNil(builder.imageUploadToS3)) {
+        this.imageUploadToS3 = builder.imageUploadToS3;
+      }
+      if (!_.isNil(builder.imageUploadURL)) {
+        this.imageUploadURL = builder.imageUploadURL;
+      }
+      if (!_.isNil(builder.imageManagerDeleteMethod)) {
+        this.imageManagerDeleteMethod = builder.imageManagerDeleteMethod;
+      }
+      if (!_.isNil(builder.imageManagerDeleteParams)) {
+        this.imageManagerDeleteParams = builder.imageManagerDeleteParams;
+      }
+      if (!_.isNil(builder.imageManagerDeleteURL)) {
+        this.imageManagerDeleteURL = builder.imageManagerDeleteURL;
+      }
+      if (!_.isNil(builder.imageManagerLoadMethod)) {
+        this.imageManagerLoadMethod = builder.imageManagerLoadMethod;
+      }
+      if (!_.isNil(builder.imageManagerLoadParams)) {
+        this.imageManagerLoadParams = builder.imageManagerLoadParams;
+      }
+      if (!_.isNil(builder.imageManagerLoadURL)) {
+        this.imageManagerLoadURL = builder.imageManagerLoadURL;
+      }
+      if (!_.isNil(builder.imageManagerPageSize)) {
+        this.imageManagerPageSize = builder.imageManagerPageSize;
+      }
+      if (!_.isNil(builder.imageManagerPreloader)) {
+        this.imageManagerPreloader = builder.imageManagerPreloader;
+      }
+      if (!_.isNil(builder.imageManagerScrollOffset)) {
+        this.imageManagerScrollOffset = builder.imageManagerScrollOffset;
+      }
+      if (!_.isNil(builder.imageManagerToggleTags)) {
+        this.imageManagerToggleTags = builder.imageManagerToggleTags;
       }
     }
   }
