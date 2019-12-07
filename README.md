@@ -6,6 +6,19 @@ If you use this builder, please copy files from `src/froala`<br>
 See `app.component.ts` for instructions on how to use the builder.<br>
 <br>
 
+## Require lib
+```
+// lodash
+npm install lodash;
+
+// froala editor
+npm install froala-editor;
+
+// (optional) froala editor angular version 
+npm install angular-froala-wysiwyg;
+```
+<br>
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.<br>
