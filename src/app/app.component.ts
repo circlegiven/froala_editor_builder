@@ -39,8 +39,10 @@ export class AppComponent implements OnInit {
       })
       .Language(Froala.Language.KO)
       .Events({
-        keyup: (event) => {
-          console.log('keyup test', event);
+        'image.error': (error, response) => {
+          if (error.code === 1) {
+            error.message = 'test';
+          }
         },
       })
       .build();

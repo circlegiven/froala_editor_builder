@@ -129,6 +129,10 @@ export namespace Froala {
     code: string;
     desc: string;
   }
+  export interface Error {
+    code: number;
+    message: string;
+  }
   export interface Events {
     // Triggered when the buttons should be refreshed.
     // Note: Returning 'false' in the handler assigned to the event will cancel the current action.
@@ -177,7 +181,7 @@ export namespace Froala {
     // Triggered after the Froala Rich Text Editor looses "focus".
     blur: () => void;
     // Triggered by the click event of the editable area.
-    click: (clickEvent) => void;
+    click: (clickEvent: JQuery.Event) => void;
     // Triggered when the content from the Froala Rich Text Editor has changed.
     contentChanged: () => void;
     // Triggered when the destroy method was called.
@@ -209,6 +213,60 @@ export namespace Froala {
     touchstart: (touchstartEvent: JQuery.Event) => void;
     // Triggered by the touchend event of the editable area.
     touchend: (touchendEvent: JQuery.Event) => void;
+    // Triggered after the HTML was served to the html.get method.
+    'html.afterGet': () => void;
+    // Triggered before the HTML was served to the html.get method.
+    'html.beforeGet': () => void;
+    // Triggered before the HTML is getting cleaned.
+    'html.processGet': (element) => void;
+    // Triggered when the HTML of the editor is saved or synced.
+    // If a string is returned, then the new string will be used.
+    'html.get': (html) => void;
+    // Triggered after the HTML was set into the editor.
+    'html.set': () => void;
+    // Triggered before uploading a pasted image from clipboard to the server.
+    // Note: Returning 'false' in the handler assigned to the event will cancel the current action.
+    'image.beforePasteUpload': (image) => void;
+    // Triggered after user confirms to remove the image from the Froala Rich Text Editor, but before actually removing it.
+    // Note: The image is removed only from the editable box and no delete request is being made the server.
+    // Note: Returning 'false' in the handler assigned to the event will cancel the current action.
+    'image.beforeRemove': ($img) => void;
+    // Triggered before uploading an image to the server.
+    // Note: Returning 'false' in the handler assigned to the event will cancel the current action.
+    'image.beforeUpload': (images) => void;
+    // Triggered before uploading an image to the server.
+    // Note: Returning 'false' in the handler assigned to the event will cancel the current action.
+    'image.hideResizer': (images) => void;
+    // Triggered by an error occurred while trying to load the image. (https://www.froala.com/wysiwyg-editor/docs/events#image.error)
+    'image.error': (error: Error, response) => void;
+    // Triggered after image was inserted in the Froala Rich Text Editor.
+    'image.inserted': ($img, response) => void;
+    // Triggered when an image has finished to load successfully.
+    'image.loaded': ($img) => void;
+    // Triggered after image is removed from the Froala Rich Text Editor.
+    // Note: The image is removed only from the editable box and no delete request is being made the server.
+    'image.removed': ($img) => void;
+    // Triggered after image was replaced with a new one.
+    'image.replaced': ($img, response) => void;
+    // Triggered while doing image resize.
+    'image.resize': ($img) => void;
+    // Triggered when image resize has finished.
+    'image.resizeEnd': ($img) => void;
+    // Triggered after the image was uploaded.
+    // Note: Returning 'false' in the handler assigned to the event will cancel the current action.
+    'image.uploaded': (response) => void;
+    // Triggered after image was uploaded to S3.
+    'image.uploadedToS3': (link, key, response) => void;
+    // Triggered before deleting an image from the image manager.
+    'imageManager.beforeDeleteImage': ($img) => void;
+    // Triggered by an error occurred while trying to load images inside the image manager. (https://www.froala.com/wysiwyg-editor/docs/events#imageManager.error)
+    'imageManager.error': (error: Error, response) => void;
+    // Triggered after the image was deleted from image manager.
+    'imageManager.imageDeleted': (data) => void;
+    // Triggered after an image was loaded in image manager.
+    'imageManager.imageLoaded': ($img) => void;
+    // Triggered after the request to load images in the media manager has been completed successfully.
+    'imageManager.imagesLoaded': (data) => void;
   }
   export class Options {
     // License key
