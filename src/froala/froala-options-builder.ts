@@ -100,7 +100,7 @@ export class FroalaOptionsBuilder {
   private _pastePlain: boolean;
   private _placeholderText: string;
   private _pluginsEnabled: Froala.Plugin[];
-  private _requestHeaders: object;
+  private _requestHeaders: Froala.GenericObject<string>;
   private _requestWithCredentials: boolean;
   private _requestWithCORS: boolean;
   private _scrollableContainer: string;
@@ -149,7 +149,7 @@ export class FroalaOptionsBuilder {
   private _imageOutputSize: boolean;
   private _imageSizeButtons: string[];
   private _imageSplitHTML: boolean;
-  private _imageStyles: object;
+  private _imageStyles: Froala.GenericObject<string>;
   private _imageTUIOptions: object;
   private _imageTextNear: boolean;
   private _imageUpload: boolean;
@@ -172,9 +172,9 @@ export class FroalaOptionsBuilder {
   private _imageManagerScrollOffset: number;
   private _imageManagerToggleTags: boolean;
   // Inline Style
-  private _inlineStyles: object;
+  private _inlineStyles: Froala.GenericObject<string>;
   // Inline Class
-  private _inlineClasses: object;
+  private _inlineClasses: Froala.GenericObject<string>;
   // Language
   private _language: Froala.Language;
   // Line Breaker
@@ -184,24 +184,24 @@ export class FroalaOptionsBuilder {
   // Link
   private _linkAlwaysBlank: boolean;
   private _linkAlwaysNoFollow: boolean;
-  private _linkAttributes: object;
+  private _linkAttributes: Froala.GenericObject<any>;
   private _linkAutoPrefix: string;
   private _linkConvertEmailAddress: boolean;
   private _linkEditButtons: string[];
   private _linkInsertButtons: string[];
-  private _linkList: object[];
+  private _linkList: Froala.GenericObject<string>[];
   private _linkMultipleStyles: boolean;
   private _linkNoOpener: boolean;
   private _linkNoReferrer: boolean;
-  private _linkStyles: object;
+  private _linkStyles: Froala.GenericObject<string>;
   private _linkText: boolean;
   // Paragraph Format
   private _paragraphDefaultSelection: string;
-  private _paragraphFormat: object;
+  private _paragraphFormat: Froala.GenericObject<string>;
   private _paragraphFormatSelection: boolean;
   private _paragraphMultipleStyles: boolean;
-  private _paragraphStyles: object;
-  private _lineHeights: object;
+  private _paragraphStyles: Froala.GenericObject<string>;
+  private _lineHeights: Froala.GenericObject<string>;
   // Lists
   private _listAdvancedTypes: boolean;
   // Quick Insert
@@ -225,7 +225,7 @@ export class FroalaOptionsBuilder {
   private _saveURL: string;
   // Table
   private _tableCellMultipleStyles: boolean;
-  private _tableCellStyles: object;
+  private _tableCellStyles: Froala.GenericObject<string>;
   private _tableColors: string[];
   private _tableColorsButtons: string[];
   private _tableColorsStep: number;
@@ -239,7 +239,7 @@ export class FroalaOptionsBuilder {
   private _tableResizer: boolean;
   private _tableResizerOffset: number;
   private _tableResizingLimit: number;
-  private _tableStyles: object;
+  private _tableStyles: Froala.GenericObject<string>;
   // Video
   private _videoAllowedProviders: string[];
   private _videoAllowedTypes: Froala.VideoType[];
@@ -1581,14 +1581,14 @@ export class FroalaOptionsBuilder {
   /**
    * An Object with additional header key/value pairs to send along with requests using the XMLHttpRequest transport.
    *
-   * @param {object} value
+   * @param {Froala.GenericObject<string>} value
    * @return {FroalaOptionsBuilder}
    */
-  RequestHeaders(value: object): FroalaOptionsBuilder {
+  RequestHeaders(value: Froala.GenericObject<string>): FroalaOptionsBuilder {
     this._requestHeaders = value;
     return this;
   }
-  get requestHeaders(): object {
+  get requestHeaders(): Froala.GenericObject<string> {
     return this._requestHeaders;
   }
 
@@ -2333,14 +2333,14 @@ export class FroalaOptionsBuilder {
    *
    * [Require plugin] image.min.js
    *
-   * @param {object} value
+   * @param {Froala.GenericObject<string>} value
    * @return {FroalaOptionsBuilder}
    */
-  ImageStyles(value: object): FroalaOptionsBuilder {
+  ImageStyles(value: Froala.GenericObject<string>): FroalaOptionsBuilder {
     this._imageStyles = value;
     return this;
   }
-  get imageStyles(): object {
+  get imageStyles(): Froala.GenericObject<string> {
     return this._imageStyles;
   }
 
@@ -2689,14 +2689,14 @@ export class FroalaOptionsBuilder {
    *
    * [Require plugin] inline_style.min.js
    *
-   * @param {object} value
+   * @param {Froala.GenericObject<string>} value
    * @return {FroalaOptionsBuilder}
    */
-  InlineStyles(value: object): FroalaOptionsBuilder {
+  InlineStyles(value: Froala.GenericObject<string>): FroalaOptionsBuilder {
     this._inlineStyles = value;
     return this;
   }
-  get inlineStyles(): object {
+  get inlineStyles(): Froala.GenericObject<string> {
     return this._inlineStyles;
   }
 
@@ -2706,14 +2706,14 @@ export class FroalaOptionsBuilder {
    *
    * [Require plugin] inline_class.min.js
    *
-   * @param {object} value
+   * @param {Froala.GenericObject<string>} value
    * @return {FroalaOptionsBuilder}
    */
-  InlineClasses(value: object): FroalaOptionsBuilder {
+  InlineClasses(value: Froala.GenericObject<string>): FroalaOptionsBuilder {
     this._inlineClasses = value;
     return this;
   }
-  get inlineClasses(): object {
+  get inlineClasses(): Froala.GenericObject<string> {
     return this._inlineClasses;
   }
 
@@ -2818,14 +2818,14 @@ export class FroalaOptionsBuilder {
    *
    * [Require plugin]	link.min.js
    *
-   * @param {object} value
+   * @param {Froala.GenericObject<any>} value
    * @return {FroalaOptionsBuilder}
    */
-  LinkAttributes(value: object): FroalaOptionsBuilder {
+  LinkAttributes(value: Froala.GenericObject<any>): FroalaOptionsBuilder {
     this._linkAttributes = value;
     return this;
   }
-  get linkAttributes(): object {
+  get linkAttributes(): Froala.GenericObject<any> {
     return this._linkAttributes;
   }
 
@@ -2898,14 +2898,14 @@ export class FroalaOptionsBuilder {
    *
    * [Require plugin]	link.min.js
    *
-   * @param {object[]} values
+   * @param {Froala.GenericObject<string>[]} values
    * @return {FroalaOptionsBuilder}
    */
-  LinkList(values: object[]): FroalaOptionsBuilder {
+  LinkList(values: Froala.GenericObject<string>[]): FroalaOptionsBuilder {
     this._linkList = values;
     return this;
   }
-  get linkList(): object[] {
+  get linkList(): Froala.GenericObject<string>[] {
     return this._linkList;
   }
 
@@ -2963,14 +2963,14 @@ export class FroalaOptionsBuilder {
    *
    * [Require plugin]	link.min.js
    *
-   * @param {object} value
+   * @param {Froala.GenericObject<string>} value
    * @return {FroalaOptionsBuilder}
    */
-  LinkStyles(value: object): FroalaOptionsBuilder {
+  LinkStyles(value: Froala.GenericObject<string>): FroalaOptionsBuilder {
     this._linkStyles = value;
     return this;
   }
-  get linkStyles(): object {
+  get linkStyles(): Froala.GenericObject<string> {
     return this._linkStyles;
   }
 
@@ -3012,14 +3012,14 @@ export class FroalaOptionsBuilder {
    *
    * [Require plugin]	paragraph_format.min.js
    *
-   * @param {object} value
+   * @param {Froala.GenericObject<string>} value
    * @return {FroalaOptionsBuilder}
    */
-  ParagraphFormat(value: object): FroalaOptionsBuilder {
+  ParagraphFormat(value: Froala.GenericObject<string>): FroalaOptionsBuilder {
     this._paragraphFormat = value;
     return this;
   }
-  get paragraphFormat(): object {
+  get paragraphFormat(): Froala.GenericObject<string> {
     return this._paragraphFormat;
   }
 
@@ -3061,14 +3061,14 @@ export class FroalaOptionsBuilder {
    *
    * [Require plugin]	paragraph_style.min.js
    *
-   * @param {object} value
+   * @param {Froala.GenericObject<string>} value
    * @return {FroalaOptionsBuilder}
    */
-  ParagraphStyles(value: object): FroalaOptionsBuilder {
+  ParagraphStyles(value: Froala.GenericObject<string>): FroalaOptionsBuilder {
     this._paragraphStyles = value;
     return this;
   }
-  get paragraphStyles(): object {
+  get paragraphStyles(): Froala.GenericObject<string> {
     return this._paragraphStyles;
   }
 
@@ -3077,14 +3077,14 @@ export class FroalaOptionsBuilder {
    *
    * [Require plugin]	line_height.min.js
    *
-   * @param {object} value
+   * @param {Froala.GenericObject<string>} value
    * @return {FroalaOptionsBuilder}
    */
-  LineHeights(value: object): FroalaOptionsBuilder {
+  LineHeights(value: Froala.GenericObject<string>): FroalaOptionsBuilder {
     this._lineHeights = value;
     return this;
   }
-  get lineHeights(): object {
+  get lineHeights(): Froala.GenericObject<string> {
     return this._lineHeights;
   }
 
@@ -3356,14 +3356,14 @@ export class FroalaOptionsBuilder {
    *
    * [Require plugin]	table.min.js
    *
-   * @param {object} value
+   * @param {Froala.GenericObject<string>} value
    * @return {FroalaOptionsBuilder}
    */
-  TableCellStyles(value: object): FroalaOptionsBuilder {
+  TableCellStyles(value: Froala.GenericObject<string>): FroalaOptionsBuilder {
     this._tableCellStyles = value;
     return this;
   }
-  get tableCellStyles(): object {
+  get tableCellStyles(): Froala.GenericObject<string> {
     return this._tableCellStyles;
   }
 
@@ -3582,14 +3582,14 @@ export class FroalaOptionsBuilder {
    *
    * [Require plugin]	table.min.js
    *
-   * @param {object} value
+   * @param {Froala.GenericObject<string>} value
    * @return {FroalaOptionsBuilder}
    */
-  TableStyles(value: object): FroalaOptionsBuilder {
+  TableStyles(value: Froala.GenericObject<string>): FroalaOptionsBuilder {
     this._tableStyles = value;
     return this;
   }
-  get tableStyles(): object {
+  get tableStyles(): Froala.GenericObject<string> {
     return this._tableStyles;
   }
 

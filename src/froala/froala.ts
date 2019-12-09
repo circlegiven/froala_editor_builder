@@ -234,7 +234,7 @@ export namespace Froala {
     pastePlain: boolean;
     placeholderText: string;
     pluginsEnabled: Plugin[];
-    requestHeaders: object;
+    requestHeaders: GenericObject<string>;
     requestWithCredentials: boolean;
     requestWithCORS: boolean;
     scrollableContainer: string;
@@ -283,7 +283,7 @@ export namespace Froala {
     imageOutputSize: boolean;
     imageSizeButtons: string[];
     imageSplitHTML: boolean;
-    imageStyles: object;
+    imageStyles: GenericObject<string>;
     imageTUIOptions: object;
     imageTextNear: boolean;
     imageUpload: boolean;
@@ -306,9 +306,9 @@ export namespace Froala {
     imageManagerScrollOffset: number;
     imageManagerToggleTags: boolean;
     // Inline Style
-    inlineStyles: object;
+    inlineStyles: GenericObject<string>;
     // Inline Class
-    inlineClasses: object;
+    inlineClasses: GenericObject<string>;
     // Language
     language: Language;
     // Line Breaker
@@ -318,24 +318,24 @@ export namespace Froala {
     // Link
     linkAlwaysBlank: boolean;
     linkAlwaysNoFollow: boolean;
-    linkAttributes: object;
+    linkAttributes: GenericObject<any>;
     linkAutoPrefix: string;
     linkConvertEmailAddress: boolean;
     linkEditButtons: string[];
     linkInsertButtons: string[];
-    linkList: object[];
+    linkList: GenericObject<string>[];
     linkMultipleStyles: boolean;
     linkNoOpener: boolean;
     linkNoReferrer: boolean;
-    linkStyles: object;
+    linkStyles: GenericObject<string>;
     linkText: boolean;
     // Paragraph Format
     paragraphDefaultSelection: string;
-    paragraphFormat: object;
+    paragraphFormat: GenericObject<string>;
     paragraphFormatSelection: boolean;
     paragraphMultipleStyles: boolean;
-    paragraphStyles: object;
-    lineHeights: object;
+    paragraphStyles: GenericObject<string>;
+    lineHeights: GenericObject<string>;
     // Lists
     listAdvancedTypes: boolean;
     // Quick Insert
@@ -348,7 +348,7 @@ export namespace Froala {
     fontAwesomeTemplate: string;
     // Special Characters
     specialCharButtons: string[];
-    specialCharactersSets: Froala.SpecialCharacterSet[];
+    specialCharactersSets: SpecialCharacterSet[];
     // WebSpellChecker
     events: object;
     // Save
@@ -359,7 +359,7 @@ export namespace Froala {
     saveURL: string;
     // Table
     tableCellMultipleStyles: boolean;
-    tableCellStyles: object;
+    tableCellStyles: GenericObject<string>;
     tableColors: string[];
     tableColorsButtons: string[];
     tableColorsStep: number;
@@ -373,7 +373,7 @@ export namespace Froala {
     tableResizer: boolean;
     tableResizerOffset: number;
     tableResizingLimit: number;
-    tableStyles: object;
+    tableStyles: GenericObject<string>;
     // Video
     videoAllowedProviders: string[];
     videoAllowedTypes: VideoType[];
