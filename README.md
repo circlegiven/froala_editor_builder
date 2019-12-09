@@ -26,3 +26,6 @@ The app will automatically reload if you change any of the source files.<br>
 <br>
 
 ## If i miss option from froala editor, please create issue.
+---
+## Reference
+https://github.com/froala/wysiwyg-editor/issues/2369#issuecomment-507637238
