@@ -3,9 +3,18 @@ import {Froala} from "./froala";
 export class FroalaOptionsBuilder {
   // License key
   private _key: string;
+  // Aviary Editor
+  private _aviaryKey: boolean;
+  private _aviaryOptions: Froala.GenericObject<any>;
   // Char Counter
   private _charCounterCount: boolean;
   private _charCounterMax: number;
+  // Code Beautifier
+  private _codeBeautifierOptions: Froala.GenericObject<any>;
+  // Code View
+  private _codeMirror: object;
+  private _codeMirrorOptions: Froala.GenericObject<any>;
+  private _codeViewKeepActiveButtons: string[];
   // Colors
   private _colorsBackground: string[];
   private _colorsButtons: string[];
@@ -31,7 +40,7 @@ export class FroalaOptionsBuilder {
   private _fileInsertButtons: string[];
   private _fileMaxSize: number;
   private _fileUpload: boolean;
-  private _fileUploadMethod: Froala.HttpMethod;
+  private _fileUploadMethod: Froala.UploadMethod;
   private _fileUploadParam: string;
   private _fileUploadParams: object;
   private _fileUploadToS3: object;
@@ -122,8 +131,8 @@ export class FroalaOptionsBuilder {
   private _imageAllowedTypes: Froala.ImageType[];
   private _imageAltButtons: string[];
   private _imageCORSProxy: string;
-  private _imageDefaultAlign: Froala.ImageAlign;
-  private _imageDefaultDisplay: Froala.ImageDisplay;
+  private _imageDefaultAlign: Froala.Align;
+  private _imageDefaultDisplay: Froala.Display;
   private _imageDefaultMargin: number;
   private _imageDefaultWidth: number;
   private _imageEditButtons: string[];
@@ -145,17 +154,17 @@ export class FroalaOptionsBuilder {
   private _imageTextNear: boolean;
   private _imageUpload: boolean;
   private _imageAddNewLine: boolean;
-  private _imageUploadMethod: Froala.HttpMethod;
+  private _imageUploadMethod: Froala.UploadMethod;
   private _imageUploadParam: string;
   private _imageUploadParams: object;
   private _imageUploadRemoteUrls: boolean;
   private _imageUploadToS3: object;
   private _imageUploadURL: string;
   // Image Manager
-  private _imageManagerDeleteMethod: Froala.HttpMethod;
+  private _imageManagerDeleteMethod: Froala.DeleteMethod;
   private _imageManagerDeleteParams: object;
   private _imageManagerDeleteURL: string;
-  private _imageManagerLoadMethod: Froala.HttpMethod;
+  private _imageManagerLoadMethod: Froala.GetMethod;
   private _imageManagerLoadParams: object;
   private _imageManagerLoadURL: string;
   private _imageManagerPageSize: number;
@@ -206,6 +215,59 @@ export class FroalaOptionsBuilder {
   // Special Characters
   private _specialCharButtons: string[];
   private _specialCharactersSets: object;
+  // WebSpellChecker TODO
+  private _events: object;
+
+  // Save
+  private _saveInterval: number;
+  private _saveMethod: Froala.UploadMethod;
+  private _saveParam: string;
+  private _saveParams: object;
+  private _saveURL: string;
+  // Table
+  private _tableCellMultipleStyles: boolean;
+  private _tableCellStyles: object;
+  private _tableColors: string[];
+  private _tableColorsButtons: string[];
+  private _tableColorsStep: number;
+  private _tableDefaultWidth: string;
+  private _tableEditButtons: string[];
+  private _tableInsertButtons: string[];
+  private _tableInsertHelper: boolean;
+  private _tableInsertHelperOffset: number;
+  private _tableInsertMaxSize: number;
+  private _tableMultipleStyles: boolean;
+  private _tableResizer: boolean;
+  private _tableResizerOffset: number;
+  private _tableResizingLimit: number;
+  private _tableStyles: object;
+  // Video
+  private _videoAllowedProviders: string[];
+  private _videoAllowedTypes: Froala.VideoType[];
+  private _videoDefaultAlign: Froala.Align;
+  private _videoDefaultDisplay: Froala.Display;
+  private _videoDefaultWidth: number;
+  private _videoEditButtons: string[];
+  private _videoInsertButtons: string[];
+  private _videoMaxSize: number;
+  private _videoMove: boolean;
+  private _videoResize: boolean;
+  private _videoResponsive: boolean;
+  private _videoSizeButtons: string[];
+  private _videoSplitHTML: boolean;
+  private _videoTextNear: boolean;
+  private _videoUpload: boolean;
+  private _videoUploadMethod: Froala.UploadMethod;
+  private _videoUploadParam: string;
+  private _videoUploadParams: object;
+  private _videoUploadToS3: object;
+  private _videoUploadURL: string;
+  // Word
+  private _wordAllowedStyleProps: string[];
+  private _wordDeniedAttrs: string[];
+  private _wordDeniedTags: string[];
+  private _wordPasteKeepFormatting: boolean;
+  private _wordPasteModal: boolean;
 
   /**
    * You must call this method at last
@@ -228,6 +290,39 @@ export class FroalaOptionsBuilder {
   }
   get key(): string {
     return this._key;
+  }
+
+  /**
+   * The key of your Adobe Creative Cloud SDK to be used for advanced image editing.
+   * For more details about getting a key (https://creativesdk.zendesk.com/hc/en-us/articles/216369343-Why-and-how-to-register-my-app-)
+   *
+   * [Require third party]	image_aviary.min.js
+   *
+   * @param {boolean} value
+   * @return {FroalaOptionsBuilder}
+   */
+  AviaryKey(value: boolean): FroalaOptionsBuilder {
+    this._aviaryKey = value;
+    return this;
+  }
+  get aviaryKey(): boolean {
+    return this._aviaryKey;
+  }
+
+  /**
+   * The options to be set on the Aviary instance.
+   *
+   * [Require third party]	image_aviary.min.js
+   *
+   * @param {Froala.GenericObject<any>}} value
+   * @return {FroalaOptionsBuilder}
+   */
+  AviaryOptions(value: Froala.GenericObject<any>): FroalaOptionsBuilder {
+    this._aviaryOptions = value;
+    return this;
+  }
+  get aviaryOptions(): Froala.GenericObject<any> {
+    return this._aviaryOptions;
   }
 
   /**
@@ -261,6 +356,72 @@ export class FroalaOptionsBuilder {
   }
   get charCounterMax(): number {
     return this._charCounterMax;
+  }
+
+  /**
+   * Specify the options for Code Beautifier.
+   *
+   * [Require plugin] code_beautifier.min.js
+   *
+   * @param {Froala.GenericObject<any>} value
+   * @return {FroalaOptionsBuilder}
+   */
+  CodeBeautifierOptions(value: Froala.GenericObject<any>): FroalaOptionsBuilder {
+    this._codeBeautifierOptions = value;
+    return this;
+  }
+  get codeBeautifierOptions(): Froala.GenericObject<any> {
+    return this._codeBeautifierOptions;
+  }
+
+  /**
+   * Disable or enable using the CodeMirror library to highlight the HTML view.
+   *
+   * Note: This option requires the CodeMirror library to be included.
+   *
+   * [Require plugin] code_view.min.js
+   *
+   * @param {object} value
+   * @return {FroalaOptionsBuilder}
+   */
+  CodeMirror(value: object): FroalaOptionsBuilder {
+    this._codeMirror = value;
+    return this;
+  }
+  get codeMirror(): object {
+    return this._codeMirror;
+  }
+
+  /**
+   * Specify the options for CodeMirror.
+   *
+   * [Require plugin] code_view.min.js
+   *
+   * @param {Froala.GenericObject<any>} value
+   * @return {FroalaOptionsBuilder}
+   */
+  CodeMirrorOptions(value: Froala.GenericObject<any>): FroalaOptionsBuilder {
+    this._codeMirrorOptions = value;
+    return this;
+  }
+  get codeMirrorOptions(): Froala.GenericObject<any> {
+    return this._codeMirrorOptions;
+  }
+
+  /**
+   * A list of buttons to keep active while editor is in Code View mode.
+   *
+   * [Require plugin] code_view.min.js
+   *
+   * @param {string[]} values
+   * @return {FroalaOptionsBuilder}
+   */
+  CodeViewKeepActiveButtons(values: string[]): FroalaOptionsBuilder {
+    this._codeViewKeepActiveButtons = values;
+    return this;
+  }
+  get codeViewKeepActiveButtons(): string[] {
+    return this._codeViewKeepActiveButtons;
   }
 
   /**
@@ -580,14 +741,14 @@ export class FroalaOptionsBuilder {
    *
    * [Require plugin] file.min.js
    *
-   * @param {Froala.HttpMethod} value
+   * @param {Froala.UploadMethod} value
    * @return {FroalaOptionsBuilder}
    */
-  FileUploadMethod(value: Froala.HttpMethod): FroalaOptionsBuilder {
+  FileUploadMethod(value: Froala.UploadMethod): FroalaOptionsBuilder {
     this._fileUploadMethod = value;
     return this;
   }
-  get fileUploadMethod(): Froala.HttpMethod {
+  get fileUploadMethod(): Froala.UploadMethod {
     return this._fileUploadMethod;
   }
 
@@ -1877,14 +2038,14 @@ export class FroalaOptionsBuilder {
    *
    * [Require plugin] image.min.js
    *
-   * @param {Froala.ImageAlign} value
+   * @param {Froala.Align} value
    * @return {FroalaOptionsBuilder}
    */
-  ImageDefaultAlign(value: Froala.ImageAlign): FroalaOptionsBuilder {
+  ImageDefaultAlign(value: Froala.Align): FroalaOptionsBuilder {
     this._imageDefaultAlign = value;
     return this;
   }
-  get imageDefaultAlign(): Froala.ImageAlign {
+  get imageDefaultAlign(): Froala.Align {
     return this._imageDefaultAlign;
   }
 
@@ -1893,14 +2054,14 @@ export class FroalaOptionsBuilder {
    *
    * [Require plugin] image.min.js
    *
-   * @param {Froala.ImageDisplay} value
+   * @param {Froala.Display} value
    * @return {FroalaOptionsBuilder}
    */
-  ImageDefaultDisplay(value: Froala.ImageDisplay): FroalaOptionsBuilder {
+  ImageDefaultDisplay(value: Froala.Display): FroalaOptionsBuilder {
     this._imageDefaultDisplay = value;
     return this;
   }
-  get imageDefaultDisplay(): Froala.ImageDisplay {
+  get imageDefaultDisplay(): Froala.Display {
     return this._imageDefaultDisplay;
   }
 
@@ -2254,14 +2415,14 @@ export class FroalaOptionsBuilder {
    *
    * [Require plugin] image.min.js
    *
-   * @param {Froala.HttpMethod} value
+   * @param {Froala.UploadMethod} value
    * @return {FroalaOptionsBuilder}
    */
-  ImageUploadMethod(value: Froala.HttpMethod): FroalaOptionsBuilder {
+  ImageUploadMethod(value: Froala.UploadMethod): FroalaOptionsBuilder {
     this._imageUploadMethod = value;
     return this;
   }
-  get imageUploadMethod(): Froala.HttpMethod {
+  get imageUploadMethod(): Froala.UploadMethod {
     return this._imageUploadMethod;
   }
 
@@ -2365,14 +2526,14 @@ export class FroalaOptionsBuilder {
    *
    * [Require plugin] image_manager.min.js
    *
-   * @param {Froala.HttpMethod} value
+   * @param {Froala.DeleteMethod} value
    * @return {FroalaOptionsBuilder}
    */
-  ImageManagerDeleteMethod(value: Froala.HttpMethod): FroalaOptionsBuilder {
+  ImageManagerDeleteMethod(value: Froala.DeleteMethod): FroalaOptionsBuilder {
     this._imageManagerDeleteMethod = value;
     return this;
   }
-  get imageManagerDeleteMethod(): Froala.HttpMethod {
+  get imageManagerDeleteMethod(): Froala.DeleteMethod {
     return this._imageManagerDeleteMethod;
   }
 
@@ -2414,14 +2575,14 @@ export class FroalaOptionsBuilder {
    *
    * [Require plugin] image_manager.min.js
    *
-   * @param {Froala.HttpMethod} value
+   * @param {Froala.GetMethod} value
    * @return {FroalaOptionsBuilder}
    */
-  ImageManagerLoadMethod(value: Froala.HttpMethod): FroalaOptionsBuilder {
+  ImageManagerLoadMethod(value: Froala.GetMethod): FroalaOptionsBuilder {
     this._imageManagerDeleteURL = value;
     return this;
   }
-  get imageManagerLoadMethod(): Froala.HttpMethod {
+  get imageManagerLoadMethod(): Froala.GetMethod {
     return this._imageManagerLoadMethod;
   }
 
@@ -3070,5 +3231,759 @@ export class FroalaOptionsBuilder {
   }
   get specialCharactersSets(): object {
     return this._specialCharactersSets;
+  }
+
+  // TODO events
+
+  /**
+   * Time in milliseconds that defines when the autosave should be triggered.
+   * Setting a higher interval helps preventing request overload on the server.
+   * The autosave will be triggered only if the content was changed from the last interval.
+   * Setting the value to 0 will disable autosave.
+   *
+   * Note: It is not recommended to use values lower than 2000ms in order to prevent overload.
+   *
+   * [Require plugin]	save.min.js
+   *
+   * @param {number} value
+   * @return {FroalaOptionsBuilder}
+   */
+  SaveInterval(value: number): FroalaOptionsBuilder {
+    this._saveInterval = value;
+    return this;
+  }
+  get saveInterval(): number {
+    return this._saveInterval;
+  }
+
+  /**
+   * The HTTP save request type.
+   *
+   * [Require plugin]	save.min.js
+   *
+   * @param {Froala.UploadMethod} value
+   * @return {FroalaOptionsBuilder}
+   */
+  SaveMethod(value: Froala.UploadMethod): FroalaOptionsBuilder {
+    this._saveMethod = value;
+    return this;
+  }
+  get saveMethod(): Froala.UploadMethod {
+    return this._saveMethod;
+  }
+
+  /**
+   * The name of the parameter which contains the rich text editor's content on the save request.
+   *
+   * [Require plugin]	save.min.js
+   *
+   * @param {string} value
+   * @return {FroalaOptionsBuilder}
+   */
+  SaveParam(value: string): FroalaOptionsBuilder {
+    this._saveParam = value;
+    return this;
+  }
+  get saveParam(): string {
+    return this._saveParam;
+  }
+
+  /**
+   * Additional parameters passed to the save request.
+   *
+   * [Require plugin]	save.min.js
+   *
+   * @param {object} value
+   * @return {FroalaOptionsBuilder}
+   */
+  SaveParams(value: object): FroalaOptionsBuilder {
+    this._saveParams = value;
+    return this;
+  }
+  get saveParams(): object {
+    return this._saveParams;
+  }
+
+  /**
+   * The URL where the save request is being made.
+   * The editor will initialize a HTTP request to the specified URL passing the editor's content in the 'body' parameter of the HTTP request.
+   *
+   * [Require plugin]	save.min.js
+   *
+   * @param {object} value
+   * @return {FroalaOptionsBuilder}
+   */
+  SaveURL(value: string): FroalaOptionsBuilder {
+    this._saveURL = value;
+    return this;
+  }
+  get saveURL(): string {
+    return this._saveURL;
+  }
+
+  /**
+   * Allows multiple table cell styles to be selected at a time.
+   *
+   * [Require plugin]	table.min.js
+   *
+   * @param {boolean} value
+   * @return {FroalaOptionsBuilder}
+   */
+  TableCellMultipleStyles(value: boolean): FroalaOptionsBuilder {
+    this._tableCellMultipleStyles = value;
+    return this;
+  }
+  get tableCellMultipleStyles(): boolean {
+    return this._tableCellMultipleStyles;
+  }
+
+  /**
+   * Set custom styles for the selected table cells.
+   * The classes should be defined in CSS, otherwise no changes will be visible.
+   *
+   * [Require plugin]	table.min.js
+   *
+   * @param {object} value
+   * @return {FroalaOptionsBuilder}
+   */
+  TableCellStyles(value: object): FroalaOptionsBuilder {
+    this._tableCellStyles = value;
+    return this;
+  }
+  get tableCellStyles(): object {
+    return this._tableCellStyles;
+  }
+
+  /**
+   * The list of colors used in the edit table colors popup for the background of a table cell.
+   * Passing 'REMOVE' as a value in the array will display the Clear Formatting button for the cell background color.
+   *
+   * [Require plugin]	table.min.js
+   *
+   * @param {string[]} values
+   * @return {FroalaOptionsBuilder}
+   */
+  TableColors(values: string[]): FroalaOptionsBuilder {
+    this._tableColors = values;
+    return this;
+  }
+  get tableColors(): string[] {
+    return this._tableColors;
+  }
+
+  /**
+   * The list of buttons that appear in the edit table colors popup.
+   *
+   * [Require plugin]	table.min.js
+   *
+   * @param {string[]} values
+   * @return {FroalaOptionsBuilder}
+   */
+  TableColorsButtons(values: string[]): FroalaOptionsBuilder {
+    this._tableColorsButtons = values;
+    return this;
+  }
+  get tableColorsButtons(): string[] {
+    return this._tableColorsButtons;
+  }
+
+  /**
+   * The number of colors displayed on a line in the edit table colors popup.
+   *
+   * [Require plugin]	table.min.js
+   *
+   * @param {number} value
+   * @return {FroalaOptionsBuilder}
+   */
+  TableColorsStep(value: number): FroalaOptionsBuilder {
+    this._tableColorsStep = value;
+    return this;
+  }
+  get tableColorsStep(): number {
+    return this._tableColorsStep;
+  }
+
+  /**
+   * The size of the table when it is inserted in the editor.
+   *
+   * [Require plugin]	table.min.js
+   *
+   * @param {string} value
+   * @return {FroalaOptionsBuilder}
+   */
+  TableDefaultWidth(value: string): FroalaOptionsBuilder {
+    this._tableDefaultWidth = value;
+    return this;
+  }
+  get tableDefaultWidth(): string {
+    return this._tableDefaultWidth;
+  }
+
+  /**
+   * The list of buttons that appear in the edit table popup, when one or many cells are selected.
+   *
+   * [Require plugin]	table.min.js
+   *
+   * @param {string[]} values
+   * @return {FroalaOptionsBuilder}
+   */
+  TableEditButtons(values: string[]): FroalaOptionsBuilder {
+    this._tableEditButtons = values;
+    return this;
+  }
+  get tableEditButtons(): string[] {
+    return this._tableEditButtons;
+  }
+
+  /**
+   * The list of buttons that appear in the insert table popup, when the toolbarInline option is set to true.
+   *
+   * [Require plugin]	table.min.js
+   *
+   * @param {string[]} values
+   * @return {FroalaOptionsBuilder}
+   */
+  TableInsertButtons(values: string[]): FroalaOptionsBuilder {
+    this._tableInsertButtons = values;
+    return this;
+  }
+  get tableInsertButtons(): string[] {
+    return this._tableInsertButtons;
+  }
+
+  /**
+   * Insert rows and columns easier by going to the edge of the table.
+   *
+   * [Require plugin]	table.min.js
+   *
+   * @param {boolean} value
+   * @return {FroalaOptionsBuilder}
+   */
+  TableInsertHelper(value: boolean): FroalaOptionsBuilder {
+    this._tableInsertHelper = value;
+    return this;
+  }
+  get tableInsertHelper(): boolean {
+    return this._tableInsertHelper;
+  }
+
+  /**
+   * The offset for showing the table insert helper.
+   *
+   * [Require plugin]	table.min.js
+   *
+   * @param {number} value
+   * @return {FroalaOptionsBuilder}
+   */
+  TableInsertHelperOffset(value: number): FroalaOptionsBuilder {
+    this._tableInsertHelperOffset = value;
+    return this;
+  }
+  get tableInsertHelperOffset(): number {
+    return this._tableInsertHelperOffset;
+  }
+
+  /**
+   * The maximum number of lines and columns when inserting a table into the rich text editor.
+   *
+   * [Require plugin]	table.min.js
+   *
+   * @param {number} value
+   * @return {FroalaOptionsBuilder}
+   */
+  TableInsertMaxSize(value: number): FroalaOptionsBuilder {
+    this._tableInsertMaxSize = value;
+    return this;
+  }
+  get tableInsertMaxSize(): number {
+    return this._tableInsertMaxSize;
+  }
+
+  /**
+   * Allows multiple table styles to be selected at a time.
+   *
+   * [Require plugin]	table.min.js
+   *
+   * @param {boolean} value
+   * @return {FroalaOptionsBuilder}
+   */
+  TableMultipleStyles(value: boolean): FroalaOptionsBuilder {
+    this._tableMultipleStyles = value;
+    return this;
+  }
+  get tableMultipleStyles(): boolean {
+    return this._tableMultipleStyles;
+  }
+
+  /**
+   * Enables resizing table cells.
+   *
+   * [Require plugin]	table.min.js
+   *
+   * @param {boolean} value
+   * @return {FroalaOptionsBuilder}
+   */
+  TableResizer(value: boolean): FroalaOptionsBuilder {
+    this._tableResizer = value;
+    return this;
+  }
+  get tableResizer(): boolean {
+    return this._tableResizer;
+  }
+
+  /**
+   * The distance in pixels from the table cell's left or right border at which to show the resizer.
+   *
+   * [Require plugin]	table.min.js
+   *
+   * @param {number} value
+   * @return {FroalaOptionsBuilder}
+   */
+  TableResizerOffset(value: number): FroalaOptionsBuilder {
+    this._tableResizerOffset = value;
+    return this;
+  }
+  get tableResizerOffset(): number {
+    return this._tableResizerOffset;
+  }
+
+  /**
+   * The minimum width in pixels of a table cell allowed while resizing. The resizer cannot be dragged over this limit.
+   *
+   * [Require plugin]	table.min.js
+   *
+   * @param {number} value
+   * @return {FroalaOptionsBuilder}
+   */
+  TableResizingLimit(value: number): FroalaOptionsBuilder {
+    this._tableResizingLimit = value;
+    return this;
+  }
+  get tableResizingLimit(): number {
+    return this._tableResizingLimit;
+  }
+
+  /**
+   * Set custom styles for the selected table.
+   * The classes should be defined in CSS, otherwise no changes will be visible on the table's appearance.
+   *
+   * [Require plugin]	table.min.js
+   *
+   * @param {object} value
+   * @return {FroalaOptionsBuilder}
+   */
+  TableStyles(value: object): FroalaOptionsBuilder {
+    this._tableStyles = value;
+    return this;
+  }
+  get tableStyles(): object {
+    return this._tableStyles;
+  }
+
+  /**
+   * The list of video providers allowed to be inserted as URL.
+   *
+   * [Require plugin]	video.min.js
+   *
+   * @param {string[]} values
+   * @return {FroalaOptionsBuilder}
+   */
+  VideoAllowedProviders(values: string[]): FroalaOptionsBuilder {
+    this._videoAllowedProviders = values;
+    return this;
+  }
+  get videoAllowedProviders(): string[] {
+    return this._videoAllowedProviders;
+  }
+
+  /**
+   * The list of video types that are allowed to be uploaded.
+   * Although this will restrict uploading other types of files, we strongly recommend you to check the file type on the server too.
+   *
+   * [Require plugin]	video.min.js
+   *
+   * @param {Froala.VideoType[]} values
+   * @return {FroalaOptionsBuilder}
+   */
+  VideoAllowedTypes(values: Froala.VideoType[]): FroalaOptionsBuilder {
+    this._videoAllowedTypes = values;
+    return this;
+  }
+  get videoAllowedTypes(): Froala.VideoType[] {
+    return this._videoAllowedTypes;
+  }
+
+  /**
+   * Sets the default video alignment when it is inserted into the WYSIWYG editor.
+   *
+   * [Require plugin]	video.min.js
+   *
+   * @param {Froala.Align} value
+   * @return {FroalaOptionsBuilder}
+   */
+  VideoDefaultAlign(value: Froala.Align): FroalaOptionsBuilder {
+    this._videoDefaultAlign = value;
+    return this;
+  }
+  get videoDefaultAlign(): Froala.Align {
+    return this._videoDefaultAlign;
+  }
+
+  /**
+   * Sets the default display for videos when they are inserted into the WYSIWYG editor.
+   *
+   * [Require plugin]	video.min.js
+   *
+   * @param {Froala.Display} value
+   * @return {FroalaOptionsBuilder}
+   */
+  VideoDefaultDisplay(value: Froala.Display): FroalaOptionsBuilder {
+    this._videoDefaultDisplay = value;
+    return this;
+  }
+  get videoDefaultDisplay(): Froala.Display {
+    return this._videoDefaultDisplay;
+  }
+
+  /**
+   * Sets the default width of the video when it is inserted in the rich text editor.
+   * Setting it to '0' will not set any width.
+   *
+   * [Require plugin]	video.min.js
+   *
+   * @param {number} value
+   * @return {FroalaOptionsBuilder}
+   */
+  VideoDefaultWidth(value: number): FroalaOptionsBuilder {
+    this._videoDefaultWidth = value;
+    return this;
+  }
+  get videoDefaultWidth(): number {
+    return this._videoDefaultWidth;
+  }
+
+  /**
+   * The buttons that appear in the edit video popup, when a video is selected.
+   *
+   * [Require plugin]	video.min.js
+   *
+   * @param {string[]} values
+   * @return {FroalaOptionsBuilder}
+   */
+  VideoEditButtons(values: string[]): FroalaOptionsBuilder {
+    this._videoEditButtons = values;
+    return this;
+  }
+  get videoEditButtons(): string[] {
+    return this._videoEditButtons;
+  }
+
+  /**
+   * The buttons that appear in the insert video popup, when a video is inserted into the WYSIWYG editor.
+   *
+   * [Require plugin]	video.min.js
+   *
+   * @param {string[]} values
+   * @return {FroalaOptionsBuilder}
+   */
+  VideoInsertButtons(values: string[]): FroalaOptionsBuilder {
+    this._videoInsertButtons = values;
+    return this;
+  }
+  get videoInsertButtons(): string[] {
+    return this._videoInsertButtons;
+  }
+
+  /**
+   * The maximum video size allowed on upload in bytes.
+   * The default value is 30MB.
+   * Although this makes an additional check before uploading the video, it is highly recommended to check image size on your server too.
+   *
+   * [Require plugin]	video.min.js
+   *
+   * @param {number} value
+   * @return {FroalaOptionsBuilder}
+   */
+  VideoMaxSize(value: number): FroalaOptionsBuilder {
+    this._videoMaxSize = value;
+    return this;
+  }
+  get videoMaxSize(): number {
+    return this._videoMaxSize;
+  }
+
+  /**
+   * Allows changing the position of the videos by dragging them.
+   *
+   * [Require plugin]	video.min.js
+   *
+   * @param {boolean} value
+   * @return {FroalaOptionsBuilder}
+   */
+  VideoMove(value: boolean): FroalaOptionsBuilder {
+    this._videoMove = value;
+    return this;
+  }
+  get videoMove(): boolean {
+    return this._videoMove;
+  }
+
+  /**
+   * Enable or disable resizing the videos inside the editor.
+   *
+   * [Require plugin]	video.min.js
+   *
+   * @param {boolean} value
+   * @return {FroalaOptionsBuilder}
+   */
+  VideoResize(value: boolean): FroalaOptionsBuilder {
+    this._videoResize = value;
+    return this;
+  }
+  get videoResize(): boolean {
+    return this._videoResize;
+  }
+
+  /**
+   * Enable or disable inserting responsive videos in the Froala Editor.
+   *
+   * [Require plugin]	video.min.js
+   *
+   * @param {boolean} value
+   * @return {FroalaOptionsBuilder}
+   */
+  VideoResponsive(value: boolean): FroalaOptionsBuilder {
+    this._videoResponsive = value;
+    return this;
+  }
+  get videoResponsive(): boolean {
+    return this._videoResponsive;
+  }
+
+  /**
+   * The buttons that appear in the edit video size popup, when changing the size of a selected video.
+   *
+   * [Require plugin]	video.min.js
+   *
+   * @param {string[]} values
+   * @return {FroalaOptionsBuilder}
+   */
+  VideoSizeButtons(values: string[]): FroalaOptionsBuilder {
+    this._videoSizeButtons = values;
+    return this;
+  }
+  get videoSizeButtons(): string[] {
+    return this._videoSizeButtons;
+  }
+
+  /**
+   * Enables splitting the HTML when inserting a new view.
+   *
+   * [Require plugin]	video.min.js
+   *
+   * @param {boolean} value
+   * @return {FroalaOptionsBuilder}
+   */
+  VideoSplitHTML(value: boolean): FroalaOptionsBuilder {
+    this._videoSplitHTML = value;
+    return this;
+  }
+  get videoSplitHTML(): boolean {
+    return this._videoSplitHTML;
+  }
+
+  /**
+   * Allows text near a video when it is aligned to the left or to the right.
+   * Disabling this option will make the 'display' button for image editor popup unavailable.
+   *
+   * [Require plugin]	video.min.js
+   *
+   * @param {boolean} value
+   * @return {FroalaOptionsBuilder}
+   */
+  VideoTextNear(value: boolean): FroalaOptionsBuilder {
+    this._videoTextNear = value;
+    return this;
+  }
+  get videoTextNear(): boolean {
+    return this._videoTextNear;
+  }
+
+  /**
+   * Enable or disable video upload.
+   *
+   * [Require plugin]	video.min.js
+   *
+   * @param {boolean} value
+   * @return {FroalaOptionsBuilder}
+   */
+  VideoUpload(value: boolean): FroalaOptionsBuilder {
+    this._videoUpload = value;
+    return this;
+  }
+  get videoUpload(): boolean {
+    return this._videoUpload;
+  }
+
+  /**
+   * The HTTP video upload request type.
+   *
+   * [Require plugin]	video.min.js
+   *
+   * @param {Froala.UploadMethod} value
+   * @return {FroalaOptionsBuilder}
+   */
+  VideoUploadMethod(value: Froala.UploadMethod): FroalaOptionsBuilder {
+    this._videoUploadMethod = value;
+    return this;
+  }
+  get videoUploadMethod(): Froala.UploadMethod {
+    return this._videoUploadMethod;
+  }
+
+  /**
+   * Customize the name of the parameter that contains the video file in the upload request.
+   *
+   * [Require plugin]	video.min.js
+   *
+   * @param {string} value
+   * @return {FroalaOptionsBuilder}
+   */
+  VideoUploadParam(value: string): FroalaOptionsBuilder {
+    this._videoUploadParam = value;
+    return this;
+  }
+  get videoUploadParam(): string {
+    return this._videoUploadParam;
+  }
+
+  /**
+   * Pass additional parameters to the upload request.
+   *
+   * [Require plugin]	video.min.js
+   *
+   * @param {object} value
+   * @return {FroalaOptionsBuilder}
+   */
+  VideoUploadParams(value: object): FroalaOptionsBuilder {
+    this._videoUploadParams = value;
+    return this;
+  }
+  get videoUploadParams(): object {
+    return this._videoUploadParams;
+  }
+
+  /**
+   * Set the options for video upload to S3.
+   * All the fields from the example below are required.
+   * Also make sure that you have enabled CORS on Amazon. (https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html)
+   *
+   * Note: 'uploadURL' property can be used instead of 'bucket' and 'region' properties to specify a custom URL from Amazon where to upload the video.
+   *
+   * [Require plugin]	video.min.js
+   *
+   * @param {object} value
+   * @return {FroalaOptionsBuilder}
+   */
+  VideoUploadToS3(value: object): FroalaOptionsBuilder {
+    this._videoUploadToS3 = value;
+    return this;
+  }
+  get videoUploadToS3(): object {
+    return this._videoUploadToS3;
+  }
+
+  /**
+   * The URL where the videos uploaded by the user are saved.
+   * When a video is uploaded, the editor sends the file to the server through a HTTP request.
+   * The server should process the data from the 'file' parameter of the request and return a JSON object containing a 'link' field with the link to the uploaded video.
+   *
+   * Note 1: By default, the videos are stored on our servers, but if you want to have full control over them, you should consider implementing the upload on your server.
+   * The videos stored on our servers, may be deleted at any time without any notice.
+   *
+   * Note 2: If the domain where the video is saved is not the same with the one where the editor is running, you may need to enable requestWithCORS option and make specific customizations on the server.
+   * For more information please refer to Cross-origin resource sharing. (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
+   *
+   * [Require plugin]	video.min.js
+   *
+   * @param {string} value
+   * @return {FroalaOptionsBuilder}
+   */
+  VideoUploadURL(value: string): FroalaOptionsBuilder {
+    this._videoUploadURL = value;
+    return this;
+  }
+  get videoUploadURL(): string {
+    return this._videoUploadURL;
+  }
+
+  /**
+   * The list of allowed CSS attributes to be used for tags when pasting from Word.
+   *
+   * @param {string[]} values
+   * @return {FroalaOptionsBuilder}
+   */
+  WordAllowedStyleProps(values: string[]): FroalaOptionsBuilder {
+    this._wordAllowedStyleProps = values;
+    return this;
+  }
+  get wordAllowedStyleProps(): string[] {
+    return this._wordAllowedStyleProps;
+  }
+
+  /**
+   * Attributes that are removed when pasting something into the rich text editor from Word.
+   *
+   * @param {string[]} values
+   * @return {FroalaOptionsBuilder}
+   */
+  WordDeniedAttrs(values: string[]): FroalaOptionsBuilder {
+    this._wordDeniedAttrs = values;
+    return this;
+  }
+  get wordDeniedAttrs(): string[] {
+    return this._wordDeniedAttrs;
+  }
+
+  /**
+   * Tags that are removed together with their content when pasting something into the rich text editor from Word.
+   *
+   * @param {string[]} values
+   * @return {FroalaOptionsBuilder}
+   */
+  WordDeniedTags(values: string[]): FroalaOptionsBuilder {
+    this._wordDeniedTags = values;
+    return this;
+  }
+  get wordDeniedTags(): string[] {
+    return this._wordDeniedTags;
+  }
+
+  /**
+   * Show modal to choose if to keep or not styles pasted from Word. If set to 'false', the default action is to keep the formatting.
+   *
+   * @param {boolean} value
+   * @return {FroalaOptionsBuilder}
+   */
+  WordPasteModal(value: boolean): FroalaOptionsBuilder {
+    this._wordPasteModal = value;
+    return this;
+  }
+  get wordPasteModal(): boolean {
+    return this._wordPasteModal;
+  }
+
+  /**
+   * Choose the default action when wordPasteModal option is enabled.
+   *
+   * @param {boolean} value
+   * @return {FroalaOptionsBuilder}
+   */
+  WordPasteKeepFormatting(value: boolean): FroalaOptionsBuilder {
+    this._wordPasteKeepFormatting = value;
+    return this;
+  }
+  get wordPasteKeepFormatting(): boolean {
+    return this._wordPasteKeepFormatting;
   }
 }

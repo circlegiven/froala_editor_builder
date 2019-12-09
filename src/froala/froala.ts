@@ -3,6 +3,7 @@ import * as $ from 'jquery';
 import {FroalaOptionsBuilder} from "./froala-options-builder";
 
 export namespace Froala {
+  export type GenericObject<T> = { [key: string]: T };
   export enum TextDirection {
     AUTO = 'auto',
     LTR = 'ltr',
@@ -13,6 +14,15 @@ export namespace Froala {
     GRAY = 'gray',
     ROYAL = 'royal',
   }
+  export enum Align {
+    LEFT = 'left',
+    CENTER = 'center',
+    RIGHT = 'right',
+  }
+  export enum Display {
+    INLINE = 'inline',
+    BLOCK = 'block'
+  }
   export enum ImageType {
     JPEG = 'jpeg',
     JPG = 'jpg',
@@ -20,21 +30,14 @@ export namespace Froala {
     GIF = 'gif',
     WEBP = 'webp'
   }
-  export enum ImageAlign {
-    LEFT = 'left',
-    CENTER = 'center',
-    RIGHT = 'right',
+  export enum VideoType {
+    MP4 = 'mp4',
+    WEBM = 'webm',
+    OGG = 'ogg',
   }
-  export enum ImageDisplay {
-    INLINE = 'inline',
-    BLOCK = 'block'
-  }
-  export enum HttpMethod {
-    POST = 'POST',
-    PUT = 'PUT',
-    DELETE = 'DELETE',
-    GET = 'GET'
-  }
+  export type UploadMethod = 'POST' | 'PUT';
+  export type DeleteMethod = 'POST' | 'DELETE';
+  export type GetMethod = 'GET' | 'POST';
   export enum EnterKey {
     // ENTER_P = $.FroalaEditor.ENTER_P,
     // ENTER_DIV = $.FroalaEditor.ENTER_DIV,
@@ -116,9 +119,18 @@ export namespace Froala {
   export class Options {
     // License key
     key: string;
+    // Aviary Editor
+    aviaryKey: boolean;
+    aviaryOptions: GenericObject<any>;
     // Char Counter
     charCounterCount: boolean;
     charCounterMax: number;
+    // Code Beautifier
+    codeBeautifierOptions: GenericObject<any>;
+    // Code View
+    codeMirror: object;
+    codeMirrorOptions: GenericObject<any>;
+    codeViewKeepActiveButtons: string[];
     // Colors
     colorsBackground: string[];
     colorsButtons: string[];
@@ -144,7 +156,7 @@ export namespace Froala {
     fileInsertButtons: string[];
     fileMaxSize: number;
     fileUpload: boolean;
-    fileUploadMethod: HttpMethod;
+    fileUploadMethod: UploadMethod;
     fileUploadParam: string;
     fileUploadParams: object;
     fileUploadToS3: object;
@@ -230,8 +242,8 @@ export namespace Froala {
     imageAllowedTypes: ImageType[];
     imageAltButtons: string[];
     imageCORSProxy: string;
-    imageDefaultAlign: ImageAlign;
-    imageDefaultDisplay: ImageDisplay;
+    imageDefaultAlign: Align;
+    imageDefaultDisplay: Display;
     imageDefaultMargin: number;
     imageDefaultWidth: number;
     imageEditButtons: string[];
@@ -253,17 +265,17 @@ export namespace Froala {
     imageTextNear: boolean;
     imageUpload: boolean;
     imageAddNewLine: boolean;
-    imageUploadMethod: HttpMethod;
+    imageUploadMethod: UploadMethod;
     imageUploadParam: string;
     imageUploadParams: object;
     imageUploadRemoteUrls: boolean;
     imageUploadToS3: object;
     imageUploadURL: string;
     // Image Manager
-    imageManagerDeleteMethod: HttpMethod;
+    imageManagerDeleteMethod: DeleteMethod;
     imageManagerDeleteParams: object;
     imageManagerDeleteURL: string;
-    imageManagerLoadMethod: HttpMethod;
+    imageManagerLoadMethod: GetMethod;
     imageManagerLoadParams: object;
     imageManagerLoadURL: string;
     imageManagerPageSize: number;
@@ -314,16 +326,87 @@ export namespace Froala {
     // Special Characters
     specialCharButtons: string[];
     specialCharactersSets: object;
+    // WebSpellChecker TODO
+    events: object;
+
+    // Save
+    saveInterval: number;
+    saveMethod: UploadMethod;
+    saveParam: string;
+    saveParams: object;
+    saveURL: string;
+    // Table
+    tableCellMultipleStyles: boolean;
+    tableCellStyles: object;
+    tableColors: string[];
+    tableColorsButtons: string[];
+    tableColorsStep: number;
+    tableDefaultWidth: string;
+    tableEditButtons: string[];
+    tableInsertButtons: string[];
+    tableInsertHelper: boolean;
+    tableInsertHelperOffset: number;
+    tableInsertMaxSize: number;
+    tableMultipleStyles: boolean;
+    tableResizer: boolean;
+    tableResizerOffset: number;
+    tableResizingLimit: number;
+    tableStyles: object;
+    // Video
+    videoAllowedProviders: string[];
+    videoAllowedTypes: VideoType[];
+    videoDefaultAlign: Align;
+    videoDefaultDisplay: Display;
+    videoDefaultWidth: number;
+    videoEditButtons: string[];
+    videoInsertButtons: string[];
+    videoMaxSize: number;
+    videoMove: boolean;
+    videoResize: boolean;
+    videoResponsive: boolean;
+    videoSizeButtons: string[];
+    videoSplitHTML: boolean;
+    videoTextNear: boolean;
+    videoUpload: boolean;
+    videoUploadMethod: UploadMethod;
+    videoUploadParam: string;
+    videoUploadParams: object;
+    videoUploadToS3: object;
+    videoUploadURL: string;
+    // Word
+    wordAllowedStyleProps: string[];
+    wordDeniedAttrs: string[];
+    wordDeniedTags: string[];
+    wordPasteModal: boolean;
+    wordPasteKeepFormatting: boolean;
 
     constructor(builder: FroalaOptionsBuilder) {
       if (!_.isNil(builder.key)) {
         this.key = builder.key;
+      }
+      if (!_.isNil(builder.aviaryKey)) {
+        this.aviaryKey = builder.aviaryKey;
+      }
+      if (!_.isNil(builder.aviaryOptions)) {
+        this.aviaryOptions = builder.aviaryOptions;
       }
       if (!_.isNil(builder.charCounterCount)) {
         this.charCounterCount = builder.charCounterCount;
       }
       if (!_.isNil(builder.charCounterMax)) {
         this.charCounterMax = builder.charCounterMax;
+      }
+      if (!_.isNil(builder.codeBeautifierOptions)) {
+        this.codeBeautifierOptions = builder.codeBeautifierOptions;
+      }
+      if (!_.isNil(builder.codeMirror)) {
+        this.codeMirror = builder.codeMirror;
+      }
+      if (!_.isNil(builder.codeMirrorOptions)) {
+        this.codeMirrorOptions = builder.codeMirrorOptions;
+      }
+      if (!_.isNil(builder.codeViewKeepActiveButtons)) {
+        this.codeViewKeepActiveButtons = builder.codeViewKeepActiveButtons;
       }
       if (!_.isNil(builder.colorsBackground)) {
         this.colorsBackground = builder.colorsBackground;
@@ -845,7 +928,146 @@ export namespace Froala {
       if (!_.isNil(builder.specialCharactersSets)) {
         this.specialCharactersSets = builder.specialCharactersSets;
       }
+      // TODO events
 
+      if (!_.isNil(builder.saveInterval)) {
+        this.saveInterval = builder.saveInterval;
+      }
+      if (!_.isNil(builder.saveMethod)) {
+        this.saveMethod = builder.saveMethod;
+      }
+      if (!_.isNil(builder.saveParam)) {
+        this.saveParam = builder.saveParam;
+      }
+      if (!_.isNil(builder.saveParams)) {
+        this.saveParams = builder.saveParams;
+      }
+      if (!_.isNil(builder.saveURL)) {
+        this.saveURL = builder.saveURL;
+      }
+      if (!_.isNil(builder.tableCellMultipleStyles)) {
+        this.tableCellMultipleStyles = builder.tableCellMultipleStyles;
+      }
+      if (!_.isNil(builder.tableCellStyles)) {
+        this.tableCellStyles = builder.tableCellStyles;
+      }
+      if (!_.isNil(builder.tableColors)) {
+        this.tableColors = builder.tableColors;
+      }
+      if (!_.isNil(builder.tableColorsButtons)) {
+        this.tableColorsButtons = builder.tableColorsButtons;
+      }
+      if (!_.isNil(builder.tableColorsStep)) {
+        this.tableColorsStep = builder.tableColorsStep;
+      }
+      if (!_.isNil(builder.tableDefaultWidth)) {
+        this.tableDefaultWidth = builder.tableDefaultWidth;
+      }
+      if (!_.isNil(builder.tableEditButtons)) {
+        this.tableEditButtons = builder.tableEditButtons;
+      }
+      if (!_.isNil(builder.tableInsertButtons)) {
+        this.tableInsertButtons = builder.tableInsertButtons;
+      }
+      if (!_.isNil(builder.tableInsertHelper)) {
+        this.tableInsertHelper = builder.tableInsertHelper;
+      }
+      if (!_.isNil(builder.tableInsertHelperOffset)) {
+        this.tableInsertHelperOffset = builder.tableInsertHelperOffset;
+      }
+      if (!_.isNil(builder.tableInsertMaxSize)) {
+        this.tableInsertMaxSize = builder.tableInsertMaxSize;
+      }
+      if (!_.isNil(builder.tableMultipleStyles)) {
+        this.tableMultipleStyles = builder.tableMultipleStyles;
+      }
+      if (!_.isNil(builder.tableResizer)) {
+        this.tableResizer = builder.tableResizer;
+      }
+      if (!_.isNil(builder.tableResizerOffset)) {
+        this.tableResizerOffset = builder.tableResizerOffset;
+      }
+      if (!_.isNil(builder.tableResizingLimit)) {
+        this.tableResizingLimit = builder.tableResizingLimit;
+      }
+      if (!_.isNil(builder.tableStyles)) {
+        this.tableStyles = builder.tableStyles;
+      }
+      if (!_.isNil(builder.videoAllowedProviders)) {
+        this.videoAllowedProviders = builder.videoAllowedProviders;
+      }
+      if (!_.isNil(builder.videoAllowedTypes)) {
+        this.videoAllowedTypes = builder.videoAllowedTypes;
+      }
+      if (!_.isNil(builder.videoDefaultAlign)) {
+        this.videoDefaultAlign = builder.videoDefaultAlign;
+      }
+      if (!_.isNil(builder.videoDefaultDisplay)) {
+        this.videoDefaultDisplay = builder.videoDefaultDisplay;
+      }
+      if (!_.isNil(builder.videoDefaultWidth)) {
+        this.videoDefaultWidth = builder.videoDefaultWidth;
+      }
+      if (!_.isNil(builder.videoEditButtons)) {
+        this.videoEditButtons = builder.videoEditButtons;
+      }
+      if (!_.isNil(builder.videoInsertButtons)) {
+        this.videoInsertButtons = builder.videoInsertButtons;
+      }
+      if (!_.isNil(builder.videoMaxSize)) {
+        this.videoMaxSize = builder.videoMaxSize;
+      }
+      if (!_.isNil(builder.videoMove)) {
+        this.videoMove = builder.videoMove;
+      }
+      if (!_.isNil(builder.videoResize)) {
+        this.videoResize = builder.videoResize;
+      }
+      if (!_.isNil(builder.videoResponsive)) {
+        this.videoResponsive = builder.videoResponsive;
+      }
+      if (!_.isNil(builder.videoSizeButtons)) {
+        this.videoSizeButtons = builder.videoSizeButtons;
+      }
+      if (!_.isNil(builder.videoSplitHTML)) {
+        this.videoSplitHTML = builder.videoSplitHTML;
+      }
+      if (!_.isNil(builder.videoTextNear)) {
+        this.videoTextNear = builder.videoTextNear;
+      }
+      if (!_.isNil(builder.videoUpload)) {
+        this.videoUpload = builder.videoUpload;
+      }
+      if (!_.isNil(builder.videoUploadMethod)) {
+        this.videoUploadMethod = builder.videoUploadMethod;
+      }
+      if (!_.isNil(builder.videoUploadParam)) {
+        this.videoUploadParam = builder.videoUploadParam;
+      }
+      if (!_.isNil(builder.videoUploadParams)) {
+        this.videoUploadParams = builder.videoUploadParams;
+      }
+      if (!_.isNil(builder.videoUploadToS3)) {
+        this.videoUploadToS3 = builder.videoUploadToS3;
+      }
+      if (!_.isNil(builder.videoUploadURL)) {
+        this.videoUploadURL = builder.videoUploadURL;
+      }
+      if (!_.isNil(builder.wordAllowedStyleProps)) {
+        this.wordAllowedStyleProps = builder.wordAllowedStyleProps;
+      }
+      if (!_.isNil(builder.wordDeniedAttrs)) {
+        this.wordDeniedAttrs = builder.wordDeniedAttrs;
+      }
+      if (!_.isNil(builder.wordDeniedTags)) {
+        this.wordDeniedTags = builder.wordDeniedTags;
+      }
+      if (!_.isNil(builder.wordPasteModal)) {
+        this.wordPasteModal = builder.wordPasteModal;
+      }
+      if (!_.isNil(builder.wordPasteKeepFormatting)) {
+        this.wordPasteKeepFormatting = builder.wordPasteKeepFormatting;
+      }
     }
   }
 }
