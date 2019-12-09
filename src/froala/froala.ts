@@ -4,24 +4,9 @@ import {FroalaOptionsBuilder} from "./froala-options-builder";
 
 export namespace Froala {
   export type GenericObject<T> = { [key: string]: T };
-  export interface ToolbarButtons {
-    [key: string]: {
-      buttons: string[];
-      align?: string;
-      buttonsVisible?: number;
-    };
-  }
-  export interface SpecialCharacterSet {
-    title: string;
-    list: {
-      char: string;
-      desc: string;
-    }[];
-  }
-  export interface EmoticonButton {
-    code: string;
-    desc: string;
-  }
+  export type UploadMethod = 'POST' | 'PUT';
+  export type DeleteMethod = 'POST' | 'DELETE';
+  export type GetMethod = 'GET' | 'POST';
   export enum TextDirection {
     AUTO = 'auto',
     LTR = 'ltr',
@@ -52,14 +37,6 @@ export namespace Froala {
     MP4 = 'mp4',
     WEBM = 'webm',
     OGG = 'ogg',
-  }
-  export type UploadMethod = 'POST' | 'PUT';
-  export type DeleteMethod = 'POST' | 'DELETE';
-  export type GetMethod = 'GET' | 'POST';
-  export enum EnterKey {
-    // ENTER_P = $.FroalaEditor.ENTER_P,
-    // ENTER_DIV = $.FroalaEditor.ENTER_DIV,
-    // ENTER_BR = $.FroalaEditor.ENTER_BR,
   }
   export enum Plugin {
     ALIGN = 'align',
@@ -134,6 +111,24 @@ export namespace Froala {
     ZH_CN = 'zh_cn',
     ZH_TW = 'zh_tw',
   }
+  export interface ToolbarButtons {
+    [key: string]: {
+      buttons: string[];
+      align?: string;
+      buttonsVisible?: number;
+    };
+  }
+  export interface SpecialCharacterSet {
+    title: string;
+    list: {
+      char: string;
+      desc: string;
+    }[];
+  }
+  export interface EmoticonButton {
+    code: string;
+    desc: string;
+  }
   export class Options {
     // License key
     key: string;
@@ -202,7 +197,7 @@ export namespace Froala {
     documentReady: boolean;
     editInPopup: boolean;
     editorClass: string;
-    enter: EnterKey;
+    enter: string;
     fullPage: boolean;
     height: number;
     heightMax: number;
