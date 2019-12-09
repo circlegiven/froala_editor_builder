@@ -4,6 +4,24 @@ import {FroalaOptionsBuilder} from "./froala-options-builder";
 
 export namespace Froala {
   export type GenericObject<T> = { [key: string]: T };
+  export interface ToolbarButtons {
+    [key: string]: {
+      buttons: string[];
+      align?: string;
+      buttonsVisible?: number;
+    };
+  }
+  export interface SpecialCharacterSet {
+    title: string;
+    list: {
+      char: string;
+      desc: string;
+    }[];
+  }
+  export interface EmoticonButton {
+    code: string;
+    desc: string;
+  }
   export enum TextDirection {
     AUTO = 'auto',
     LTR = 'ltr',
@@ -147,7 +165,7 @@ export namespace Froala {
     // Emoticons
     emoticonsButtons: string[];
     emoticonsUseImage: boolean;
-    emoticonsSet: object[];
+    emoticonsSet: EmoticonButton[];
     emoticonsStep: number;
     // Entities
     entities: string;
@@ -163,7 +181,7 @@ export namespace Froala {
     fileUploadURL: string;
     fileUseSelectedText: boolean;
     // Font Family
-    fontFamily: object;
+    fontFamily: GenericObject<string>;
     fontFamilyDefaultSelection: string;
     fontFamilySelection: boolean;
     // Font Size
@@ -171,6 +189,11 @@ export namespace Froala {
     fontSize: string[];
     fontSizeDefaultSelection: string;
     fontSizeUnit: string;
+    // Form
+    formEditButtons: string[];
+    formMultipleStyles: boolean;
+    formStyles: GenericObject<string>;
+    formUpdateButtons: string[];
     // General
     attribution: boolean;
     autofocus: boolean;
@@ -222,10 +245,10 @@ export namespace Froala {
     tabSpaces: number;
     theme: Theme;
     toolbarBottom: boolean;
-    toolbarButtons: string[] | object;
-    toolbarButtonsMD: string[] | object;
-    toolbarButtonsSM: string[] | object;
-    toolbarButtonsXS: string[] | object;
+    toolbarButtons: Partial<ToolbarButtons>;
+    toolbarButtonsMD: Partial<ToolbarButtons>;
+    toolbarButtonsSM: Partial<ToolbarButtons>;
+    toolbarButtonsXS: Partial<ToolbarButtons>;
     toolbarContainer: boolean;
     toolbarInline: boolean;
     toolbarSticky: boolean;
@@ -325,7 +348,7 @@ export namespace Froala {
     fontAwesomeTemplate: string;
     // Special Characters
     specialCharButtons: string[];
-    specialCharactersSets: object;
+    specialCharactersSets: Froala.SpecialCharacterSet[];
     // WebSpellChecker
     events: object;
     // Save
@@ -502,6 +525,18 @@ export namespace Froala {
       }
       if (!_.isNil(builder.fontSizeUnit)) {
           this.fontSizeUnit = builder.fontSizeUnit;
+      }
+      if (!_.isNil(builder.formEditButtons)) {
+          this.formEditButtons = builder.formEditButtons;
+      }
+      if (!_.isNil(builder.formMultipleStyles)) {
+          this.formMultipleStyles = builder.formMultipleStyles;
+      }
+      if (!_.isNil(builder.formStyles)) {
+          this.formStyles = builder.formStyles;
+      }
+      if (!_.isNil(builder.formUpdateButtons)) {
+          this.formUpdateButtons = builder.formUpdateButtons;
       }
       if (!_.isNil(builder.attribution)) {
         this.attribution = builder.attribution;

@@ -31,7 +31,7 @@ export class FroalaOptionsBuilder {
   // Emoticons
   private _emoticonsButtons: string[];
   private _emoticonsUseImage: boolean;
-  private _emoticonsSet: object[];
+  private _emoticonsSet: Froala.EmoticonButton[];
   private _emoticonsStep: number;
   // Entities
   private _entities: string;
@@ -47,7 +47,7 @@ export class FroalaOptionsBuilder {
   private _fileUploadURL: string;
   private _fileUseSelectedText: boolean;
   // Font Family
-  private _fontFamily: object;
+  private _fontFamily: Froala.GenericObject<string>;
   private _fontFamilyDefaultSelection: string;
   private _fontFamilySelection: boolean;
   // Font Size
@@ -58,7 +58,7 @@ export class FroalaOptionsBuilder {
   // Form
   private _formEditButtons: string[];
   private _formMultipleStyles: boolean;
-  private _formStyles: object;
+  private _formStyles: Froala.GenericObject<string>;
   private _formUpdateButtons: string[];
   // General
   private _attribution: boolean;
@@ -111,10 +111,10 @@ export class FroalaOptionsBuilder {
   private _tabSpaces: number;
   private _theme: Froala.Theme;
   private _toolbarBottom: boolean;
-  private _toolbarButtons: string[] | object;
-  private _toolbarButtonsMD: string[] | object;
-  private _toolbarButtonsSM: string[] | object;
-  private _toolbarButtonsXS: string[] | object;
+  private _toolbarButtons: Partial<Froala.ToolbarButtons>;
+  private _toolbarButtonsMD: Partial<Froala.ToolbarButtons>;
+  private _toolbarButtonsSM: Partial<Froala.ToolbarButtons>;
+  private _toolbarButtonsXS: Partial<Froala.ToolbarButtons>;
   private _toolbarContainer: boolean;
   private _toolbarInline: boolean;
   private _toolbarSticky: boolean;
@@ -214,7 +214,7 @@ export class FroalaOptionsBuilder {
   private _fontAwesomeTemplate: string;
   // Special Characters
   private _specialCharButtons: string[];
-  private _specialCharactersSets: object;
+  private _specialCharactersSets: Froala.SpecialCharacterSet[];
   // WebSpellChecker
   private _events: object;
   // Save
@@ -608,14 +608,14 @@ export class FroalaOptionsBuilder {
    *
    * [Require plugin] emoticons.min.js
    *
-   * @param {object[]} values
+   * @param {Froala.EmoticonButton[]} values
    * @return {FroalaOptionsBuilder}
    */
-  EmoticonsSet(values: object[]): FroalaOptionsBuilder {
+  EmoticonsSet(values: Froala.EmoticonButton[]): FroalaOptionsBuilder {
     this._emoticonsSet = values;
     return this;
   }
-  get emoticonsSet(): object[] {
+  get emoticonsSet(): Froala.EmoticonButton[] {
     return this._emoticonsSet;
   }
 
@@ -848,14 +848,14 @@ export class FroalaOptionsBuilder {
    *
    * [Require plugin] font_family.min.js
    *
-   * @param {object} value
+   * @param {Froala.GenericObject<string>} value
    * @return {FroalaOptionsBuilder}
    */
-  FontFamily(value: object): FroalaOptionsBuilder {
+  FontFamily(value: Froala.GenericObject<string>): FroalaOptionsBuilder {
     this._fontFamily = value;
     return this;
   }
-  get fontFamily(): object {
+  get fontFamily(): Froala.GenericObject<string> {
     return this._fontFamily;
   }
 
@@ -992,14 +992,14 @@ export class FroalaOptionsBuilder {
    *
    * [Require plugin]	form.min.js
    *
-   * @param {object} value
+   * @param {Froala.GenericObject<string>} value
    * @return {FroalaOptionsBuilder}
    */
-  FormStyles(value: object): FroalaOptionsBuilder {
+  FormStyles(value: Froala.GenericObject<string>): FroalaOptionsBuilder {
     this._formStyles = value;
     return this;
   }
-  get formStyles(): object {
+  get formStyles(): Froala.GenericObject<string> {
     return this._formStyles;
   }
 
@@ -1766,14 +1766,14 @@ export class FroalaOptionsBuilder {
    • quote button requires quote plugin;
    • specialCharacters button requires specialCharacters plugin;
    *
-   * @param {string[] | object} values
+   * @param {Partial<Froala.ToolbarButtons>} values
    * @return {FroalaOptionsBuilder}
    */
-  ToolbarButtons(values: string[] | object): FroalaOptionsBuilder {
+  ToolbarButtons(values: Partial<Froala.ToolbarButtons>): FroalaOptionsBuilder {
     this._toolbarButtons = values;
     return this;
   }
-  get toolbarButtons(): string[] | object {
+  get toolbarButtons(): Partial<Froala.ToolbarButtons> {
     return this._toolbarButtons;
   }
 
@@ -1781,42 +1781,42 @@ export class FroalaOptionsBuilder {
    * The list of buttons that appear in the rich text editor's toolbar on medium devices (≥ 992px).
    * By default on MD screens, the editor uses the same buttons as for toolbarButtons.
    *
-   * @param {string[] | object} values
+   * @param {Partial<Froala.ToolbarButtons>} values
    * @return {FroalaOptionsBuilder}
    */
-  ToolbarButtonsMD(values: string[] | object): FroalaOptionsBuilder {
+  ToolbarButtonsMD(values: Partial<Froala.ToolbarButtons>): FroalaOptionsBuilder {
     this._toolbarButtonsMD = values;
     return this;
   }
-  get toolbarButtonsMD(): string[] | object {
+  get toolbarButtonsMD(): Partial<Froala.ToolbarButtons> {
     return this._toolbarButtonsMD;
   }
 
   /**
    * The list of buttons that appear in the rich text editor's toolbar on small devices (≥ 768px).
    *
-   * @param {string[] | object} values
+   * @param {Partial<Froala.ToolbarButtons>} values
    * @return {FroalaOptionsBuilder}
    */
-  ToolbarButtonsSM(values: string[] | object): FroalaOptionsBuilder {
+  ToolbarButtonsSM(values: Partial<Froala.ToolbarButtons>): FroalaOptionsBuilder {
     this._toolbarButtonsSM = values;
     return this;
   }
-  get toolbarButtonsSM(): string[] | object {
+  get toolbarButtonsSM(): Partial<Froala.ToolbarButtons> {
     return this._toolbarButtonsSM;
   }
 
   /**
    * The list of buttons that appear in the rich text editor's toolbar on extra small devices (< 768px).
    *
-   * @param {string[] | object} values
+   * @param {Partial<Froala.ToolbarButtons>} values
    * @return {FroalaOptionsBuilder}
    */
-  ToolbarButtonsXS(values: string[] | object): FroalaOptionsBuilder {
+  ToolbarButtonsXS(values: Partial<Froala.ToolbarButtons>): FroalaOptionsBuilder {
     this._toolbarButtonsXS = values;
     return this;
   }
-  get toolbarButtonsXS(): string[] | object {
+  get toolbarButtonsXS(): Partial<Froala.ToolbarButtons> {
     return this._toolbarButtonsXS;
   }
 
@@ -3221,14 +3221,14 @@ export class FroalaOptionsBuilder {
    *
    * [Require third party]	special_characters.min.js
    *
-   * @param {object} value
+   * @param {Froala.SpecialCharacterSet[]} value
    * @return {FroalaOptionsBuilder}
    */
-  SpecialCharactersSets(value: object): FroalaOptionsBuilder {
+  SpecialCharactersSets(value: Froala.SpecialCharacterSet[]): FroalaOptionsBuilder {
     this._specialCharactersSets = value;
     return this;
   }
-  get specialCharactersSets(): object {
+  get specialCharactersSets(): Froala.SpecialCharacterSet[] {
     return this._specialCharactersSets;
   }
 

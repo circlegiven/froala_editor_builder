@@ -19,13 +19,22 @@ export class AppComponent implements OnInit {
       .PlaceholderText('placeholder test')
       .Width('auto')
       .FontSize(['1','5','10'])
-      .PluginsEnabled([Froala.Plugin.PARAGRAPH_FORMAT, Froala.Plugin.FONT_SIZE, Froala.Plugin.IMAGE, Froala.Plugin.COLORS, Froala.Plugin.CHAR_COUNTER])
       .ImageDefaultDisplay(Froala.Display.INLINE)
       .ImageDefaultWidth(0)
       .ImageMaxSize(1024 * 1024 * 3)
       .CharCounterCount(true)
       .ToolbarSticky(false)
       .Attribution(false)
+      .FontFamily({
+        'Arial,Helvetica,sans-serif': 'Arial',
+        'Courier New,Courier,monospace': 'Courier New',
+        'Georgia,serif': 'Georgia',
+        'Impact,Charcoal,sans-serif': 'Impact',
+        'Lucida Console,Monaco,monospace': 'Lucida Console',
+        'Tahoma,Geneva,sans-serif': 'Tahoma',
+        'Times New Roman,Times,serif': 'Times New Roman',
+        'Verdana,Geneva,sans-serif': 'Verdana',
+      })
       .Language(Froala.Language.KO)
       .build();
     console.log(this.froalaOptions);

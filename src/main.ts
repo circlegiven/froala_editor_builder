@@ -13,8 +13,7 @@ import 'froala-editor/js/plugins/char_counter.min.js';
 import 'froala-editor/js/plugins/paragraph_format.min.js';
 import 'froala-editor/js/plugins/image.min.js';
 import 'froala-editor/js/plugins/colors.min.js';
-
-// import 'froala-editor/js/plugins/emoticons.min.js';
+import 'froala-editor/js/plugins/font_family.min.js';
 
 
 if (environment.production) {
