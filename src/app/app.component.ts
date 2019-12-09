@@ -14,9 +14,18 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     // set froala editor options
     this.froalaOptions = new FroalaOptionsBuilder()
+      .HeightMax(400)
+      .HeightMin(400)
+      .PlaceholderText('placeholder test')
+      .Width('auto')
       .FontSize(['1','5','10'])
-      .Attribution(false)
+      .PluginsEnabled([Froala.Plugin.PARAGRAPH_FORMAT, Froala.Plugin.FONT_SIZE, Froala.Plugin.IMAGE, Froala.Plugin.COLORS, Froala.Plugin.CHAR_COUNTER])
+      .ImageDefaultDisplay(Froala.Display.INLINE)
+      .ImageDefaultWidth(0)
+      .ImageMaxSize(1024 * 1024 * 3)
       .CharCounterCount(true)
+      .ToolbarSticky(false)
+      .Attribution(false)
       .Language(Froala.Language.KO)
       .build();
     console.log(this.froalaOptions);
