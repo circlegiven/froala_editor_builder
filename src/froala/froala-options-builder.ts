@@ -267,6 +267,8 @@ export class FroalaOptionsBuilder {
   private _wordDeniedTags: string[];
   private _wordPasteKeepFormatting: boolean;
   private _wordPasteModal: boolean;
+  // Angular
+  private _immediateAngularModelUpdate: boolean;
 
   /**
    * You must call this method at last
@@ -3998,5 +4000,20 @@ export class FroalaOptionsBuilder {
   }
   get wordPasteKeepFormatting(): boolean {
     return this._wordPasteKeepFormatting;
+  }
+
+  /**
+   * This option synchronizes the angular model as soon as a key is released in the editor.
+   * Note that it may affect performances.
+   *
+   * @param {boolean} value
+   * @return {FroalaOptionsBuilder}
+   */
+  ImmediateAngularModelUpdate(value: boolean): FroalaOptionsBuilder {
+    this._immediateAngularModelUpdate = value;
+    return this;
+  }
+  get immediateAngularModelUpdate(): boolean {
+    return this._immediateAngularModelUpdate;
   }
 }

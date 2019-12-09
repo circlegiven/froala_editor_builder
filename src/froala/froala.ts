@@ -630,6 +630,8 @@ export namespace Froala {
     wordDeniedTags: string[];
     wordPasteModal: boolean;
     wordPasteKeepFormatting: boolean;
+    // Angular
+    immediateAngularModelUpdate: boolean;
 
     constructor(builder: FroalaOptionsBuilder) {
       if (!_.isNil(builder.key)) {
@@ -1331,6 +1333,9 @@ export namespace Froala {
       }
       if (!_.isNil(builder.wordPasteKeepFormatting)) {
         this.wordPasteKeepFormatting = builder.wordPasteKeepFormatting;
+      }
+      if (!_.isNil(builder.immediateAngularModelUpdate)) {
+        this.immediateAngularModelUpdate = builder.immediateAngularModelUpdate;
       }
     }
   }
