@@ -216,7 +216,7 @@ export class FroalaOptionsBuilder {
   private _specialCharButtons: string[];
   private _specialCharactersSets: Froala.SpecialCharacterSet[];
   // WebSpellChecker
-  private _events: object;
+  private _events: Partial<Froala.Events>;
   // Save
   private _saveInterval: number;
   private _saveMethod: Froala.UploadMethod;
@@ -3237,14 +3237,14 @@ export class FroalaOptionsBuilder {
    *
    * [Require third party]	wscbundle.min.js
    *
-   * @param {object} value
+   * @param {Partial<Froala.Events>} value
    * @return {FroalaOptionsBuilder}
    */
-  Events(value: object): FroalaOptionsBuilder {
+  Events(value: Partial<Froala.Events>): FroalaOptionsBuilder {
     this._events = value;
     return this;
   }
-  get events(): object {
+  get events(): Partial<Froala.Events> {
     return this._events;
   }
 

@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
-import * as $ from 'jquery';
 import {FroalaOptionsBuilder} from "./froala-options-builder";
+import * as $ from 'JQuery';
 
 export namespace Froala {
   export type GenericObject<T> = { [key: string]: T };
@@ -128,6 +128,87 @@ export namespace Froala {
   export interface EmoticonButton {
     code: string;
     desc: string;
+  }
+  export interface Events {
+    // Triggered when the buttons should be refreshed.
+    // Note: Returning 'false' in the handler assigned to the event will cancel the current action.
+    'buttons.refresh': () => void;
+    // Triggered when the maxCharNumber was exceeded.
+    'charCounter.exceeded': () => void;
+    // Triggered when the charCounter should update.
+    'charCounter.update': () => void;
+    // Triggered when the code view is changed.
+    'codeView.update': () => void;
+    // This event is a generic event that is triggered after every command executed in the editor.
+    'commands.after': (command, param1, param2) => void;
+    // This event is a generic event that is triggered before every command executed in the editor.
+    // Note: Returning 'false' in the handler assigned to the event will cancel the current action.
+    'commands.before': (command, param1, param2) => void;
+    // This event is a generic event that is triggered after every command clicked in the editor.
+    'commands.mousedown': (button) => void;
+    // This event is a generic event that is triggered after command redo.
+    'commands.redo': () => void;
+    // This event is a generic event that is triggered after command undo.
+    'commands.undo': () => void;
+    // Triggered after the editor is enabled for editing.
+    'edit.on': () => void;
+    // Triggered after the editor is disabled for editing.
+    'edit.off': () => void;
+    // Triggered after the any element is dropped in editor.
+    'element.dropped': (element) => void;
+    // Triggered before the embedly embeded is removed from editor.
+    'embedly.beforeRemove': (embeded) => void;
+    // Triggered before uploading a file to the server.
+    // Note: Returning 'false' in the handler assigned to the event will cancel the current action.
+    'file.beforeUpload': (files) => void;
+    // Triggered after error is occured in uploading a file to the server.
+    // Note: Returning 'false' in the handler assigned to the event will cancel the current action.
+    'file.error': (error, response) => void;
+    // Triggered after the request to upload a file has been completed successfully.
+    'file.inserted': ($file, response) => void;
+    // Triggered after removing a file link.
+    // Note: Returning 'false' in the handler assigned to the event will cancel the current action.
+    'file.unlink': (link) => void;
+    // Triggered after the file was uploaded.
+    // Note: Returning 'false' in the handler assigned to the event will cancel the current action.
+    'file.uploaded': (response) => void;
+    // Triggered after the file was uploaded to S3.
+    'file.uploadedToS3': (link, key, response) => void;
+    // Triggered after the Froala Rich Text Editor looses "focus".
+    blur: () => void;
+    // Triggered by the click event of the editable area.
+    click: (clickEvent) => void;
+    // Triggered when the content from the Froala Rich Text Editor has changed.
+    contentChanged: () => void;
+    // Triggered when the destroy method was called.
+    destroy: () => void;
+    // Triggered by the drop event of the editable area.
+    // Instead of assigning the event this way, it is better to assign it like described in the dropped event example.
+    drop: (dropEvent) => void;
+    // Triggered after the Froala Rich Text Editor gets focused.
+    focus: () => void;
+    // Triggered when the Froala Rich Text Editor has finished to initialize.
+    initialized: () => void;
+    // Triggered when the Froala Rich Text Editor has finished to do basic initialization for initOnClick option.
+    initializationDelayed: () => void;
+    // Triggered by the input event of the editable area.
+    input: (inputEvent: JQuery.Event) => void;
+    // Triggered by the keydown event of the editable area.
+    keydown: (keydownEvent: JQuery.Event) => void;
+    // Triggered by the keypress event of the editable area.
+    keypress: (keypressEvent: JQuery.Event) => void;
+    // Triggered by the keyup event of the editable area.
+    keyup: (keyupEvent: JQuery.Event) => void;
+    // Triggered by the mousedown event of the editable area.
+    mousedown: (mousedownEvent: JQuery.Event) => void;
+    // Triggered by the mouseup event of the editable area.
+    mouseup: (mouseupEvent: JQuery.Event) => void;
+    // Triggered before the command is executed via shortcut.
+    shortcut: (event: Event, commandName: string, shortcutValue: any) => void;
+    // Triggered by the touchstart event of the editable area.
+    touchstart: (touchstartEvent: JQuery.Event) => void;
+    // Triggered by the touchend event of the editable area.
+    touchend: (touchendEvent: JQuery.Event) => void;
   }
   export class Options {
     // License key
@@ -345,7 +426,7 @@ export namespace Froala {
     specialCharButtons: string[];
     specialCharactersSets: SpecialCharacterSet[];
     // WebSpellChecker
-    events: object;
+    events: Partial<Events>;
     // Save
     saveInterval: number;
     saveMethod: UploadMethod;

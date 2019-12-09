@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Froala, FroalaOptionsBuilder} from "../froala";
+import FroalaEditor from 'froala-editor';
+
 
 @Component({
   selector: 'app-root',
@@ -36,6 +38,11 @@ export class AppComponent implements OnInit {
         'Verdana,Geneva,sans-serif': 'Verdana',
       })
       .Language(Froala.Language.KO)
+      .Events({
+        keyup: (event) => {
+          console.log('keyup test', event);
+        },
+      })
       .build();
     console.log(this.froalaOptions);
   }
