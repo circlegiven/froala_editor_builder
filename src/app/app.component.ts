@@ -26,6 +26,20 @@ export class AppComponent implements OnInit {
       .ImageMaxSize(1024 * 1024 * 3)
       .CharCounterCount(true)
       .ToolbarSticky(false)
+      .ToolbarButtons({
+        moreText: {
+          buttons: ['bold', 'italic', 'underline', 'fontSize', 'textColor']
+        },
+        moreParagraph: {
+          buttons: ['paragraphFormat']
+        },
+        moreRich: {
+          buttons: ['insertImage']
+        },
+        moreMisc: {
+          buttons: ['undo', 'alert', 'redo'],
+        }
+      })
       .Attribution(false)
       .FontFamily({
         'Arial,Helvetica,sans-serif': 'Arial',
@@ -46,10 +60,25 @@ export class AppComponent implements OnInit {
         },
       })
       .build();
+    FroalaEditor.DefineIcon('alert', {NAME: 'info'});
+    FroalaEditor.RegisterCommand('alert', {
+      title: 'alert',
+      focus: false,
+      undo: false,
+      refreshAfterCallback: false,
+
+      callback: () => {
+        console.log('Hello!', this);
+      }
+    });
     console.log(this.froalaOptions);
   }
 
   onChangeContents(contents) {
     console.log(contents);
+  }
+
+  froalaInitTest(data) {
+    console.log('froalaInitTest', data);
   }
 }
