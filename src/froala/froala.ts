@@ -208,7 +208,7 @@ export namespace Froala {
     // Triggered by the mouseup event of the editable area.
     mouseup: (mouseupEvent: JQuery.Event) => void;
     // Triggered before the command is executed via shortcut.
-    shortcut: (event: Event, commandName: string, shortcutValue: any) => void;
+    shortcut: (event: Event, command: string, shortcutValue: any) => void;
     // Triggered by the touchstart event of the editable area.
     touchstart: (touchstartEvent: JQuery.Event) => void;
     // Triggered by the touchend event of the editable area.
@@ -267,6 +267,101 @@ export namespace Froala {
     'imageManager.imageLoaded': ($img) => void;
     // Triggered after the request to load images in the media manager has been completed successfully.
     'imageManager.imagesLoaded': (data) => void;
+    // Triggered when a bad link is typed for insertion into the Froala Rich Text Editor.
+    'link.bad': (original_href) => void;
+    // Triggered before inserting a link inside the editor
+    // Note: Returning 'false' in the handler assigned to the event will cancel the current action.
+    'link.beforeInsert': (link, text, attrs) => void;
+    // Triggered before removing a link inside the editor
+    // Note: Returning 'false' in the handler assigned to the event will cancel the current action.
+    'link.beforeRemove': (link, text, attrs) => void;
+    // Triggered after pasting something into the Froala Rich Text Editor.
+    'paste.after': () => void;
+    // Triggered after the content was pasted from the clipboard into the Froala Rich Text Editor and it was cleaned up.
+    // If a string is returned, the new string will be used as the pasted content.
+    'paste.afterCleanup': (clipboard_html) => void;
+    // Triggered before pasting something into the Froala Rich Text Editor.
+    // Note: Returning 'false' in the handler assigned to the event will cancel the current action.
+    'paste.before': (original_event: JQuery.Event) => void;
+    // Triggered after the content is pasted from the clipboard into the Froala Rich Text Editor.
+    // If a string is returned the new string will be used as the pasted content.
+    'paste.beforeCleanup': (clipboard_html) => void;
+    // Triggered after the content is pasted from the MS Office into the Froala Rich Text Editor.
+    'paste.wordPaste': (clipboard_html) => void;
+    // Triggered when a popup is hidden.
+    // [id] should be replaced with the id of the popup.
+    'popups.hide.[id]': () => void;
+    // Triggered when a popup is shown.
+    // [id] should be replaced with the id of the popup.
+    'popups.show.[id]': () => void;
+    // Triggered before the position of toolbar is refreshed.
+    'position.refresh': () => void;
+    // Triggered after the save request.
+    'save.after': (data) => void;
+    // Triggered before doing the save request.
+    // If a string is returned, the new string will be used as the saved content.
+    // Note: Returning 'false' in the handler assigned to the event will cancel the current action.
+    'save.before': (html) => void;
+    // Triggered when an error occurs during save request.
+    'save.error': (error: Error, response) => void;
+    // Triggered after getting a snapshot
+    'snapshot.after': () => void;
+    // Triggered before getting a snapshot.
+    'snapshot.before': () => void;
+    // Triggered after the table was inserted.
+    'table.inserted': (table) => void;
+    // Triggered after the table was resized.
+    'table.resized': (table) => void;
+    // Triggered before hiding the toolbar on pressing esc key.
+    // Note: Returning 'false' in the handler assigned to the event will cancel the current action.
+    'toolbar.esc': () => void;
+    // Triggered when doing focus on editor.
+    // Note: Returning 'false' in the handler assigned to the event will cancel the current action.
+    'toolbar.focusEditor': () => void;
+    // Triggered when hiding the editor toolbar.
+    // Note: Returning 'false' in the handler assigned to the event will cancel the current action.
+    'toolbar.hide': () => void;
+    // Triggered when showing the editor toolbar.
+    // Note: Returning 'false' in the handler assigned to the event will cancel the current action.
+    'toolbar.show': () => void;
+    // Triggered by an error occurred while trying to insert a video by embedded code.
+    'video.codeError': (code) => void;
+    // Triggered after video was inserted.
+    'video.inserted': ($video) => void;
+    // Triggered after video was replaced.
+    'video.replaced': ($video) => void;
+    // Triggered by an error occurred while trying to insert a video by URL.
+    'video.linkError': (link) => void;
+    // Triggered after video was removed.
+    'video.removed': ($video) => void;
+    // Triggered after video was loaded.
+    'video.loaded': ($video) => void;
+    // Triggered after video was uploaded.
+    'video.uploaded': (response) => void;
+    // Triggered after video was uploaded to S3.
+    'video.uploadedToS3': (link, key, response) => void;
+    // Triggered before video is uploaded.
+    // Note: Returning 'false' in the handler assigned to the event will cancel the current action.
+    'video.beforeUpload': ($video) => void;
+    // Triggered before video is removed.
+    // Note: Returning 'false' in the handler assigned to the event will cancel the current action.
+    'video.beforeRemove': ($video) => void;
+    // Triggered after hiding the edit toolbar.
+    // Note: Returning 'false' in the handler assigned to the event will cancel the current action.
+    'video.hideResizer': () => void;
+    // This event is a generic event that is triggered after every command inside the Quick Insert tool is executed.
+    // The command information are passed through the 'command' parameter.
+    'quickInsert.commands.after': (command) => void;
+    // This event is a generic event that is triggered before every command inside the Quick Insert tool is executed.
+    // The command information are passed through the 'command' parameter.
+    // Note: Returning 'false' in the handler assigned to the event will cancel the current action.
+    'quickInsert.commands.before': (command) => void;
+    // Triggered after auto-linking an url while typing.
+    'url.linked': (link) => void;
+    // Triggered after cut command is executed.
+    'window.cut': () => void;
+    // Triggered after copy command is executed.
+    'window.copy': () => void;
   }
   export class Options {
     // License key
