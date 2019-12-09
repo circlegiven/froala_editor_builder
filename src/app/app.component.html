@@ -6,6 +6,10 @@
 
 <div class="content" role="main">
   <div [froalaEditor]="froalaOptions" [(froalaModel)]="editorContents"></div>
+  <div style="margin: 10px 0">
+    Editor Viewer
+  </div>
+  <div [froalaView]="editorContents"></div>
 </div>
 
 
