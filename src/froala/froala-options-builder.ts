@@ -215,9 +215,8 @@ export class FroalaOptionsBuilder {
   // Special Characters
   private _specialCharButtons: string[];
   private _specialCharactersSets: object;
-  // WebSpellChecker TODO
+  // WebSpellChecker
   private _events: object;
-
   // Save
   private _saveInterval: number;
   private _saveMethod: Froala.UploadMethod;
@@ -3233,7 +3232,21 @@ export class FroalaOptionsBuilder {
     return this._specialCharactersSets;
   }
 
-  // TODO events
+  /**
+   * The options used for WebSpellChecker.
+   *
+   * [Require third party]	wscbundle.min.js
+   *
+   * @param {object} value
+   * @return {FroalaOptionsBuilder}
+   */
+  Events(value: object): FroalaOptionsBuilder {
+    this._events = value;
+    return this;
+  }
+  get events(): object {
+    return this._events;
+  }
 
   /**
    * Time in milliseconds that defines when the autosave should be triggered.

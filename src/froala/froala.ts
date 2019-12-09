@@ -326,9 +326,8 @@ export namespace Froala {
     // Special Characters
     specialCharButtons: string[];
     specialCharactersSets: object;
-    // WebSpellChecker TODO
+    // WebSpellChecker
     events: object;
-
     // Save
     saveInterval: number;
     saveMethod: UploadMethod;
@@ -928,8 +927,9 @@ export namespace Froala {
       if (!_.isNil(builder.specialCharactersSets)) {
         this.specialCharactersSets = builder.specialCharactersSets;
       }
-      // TODO events
-
+      if (!_.isNil(builder.events)) {
+        this.events = builder.events;
+      }
       if (!_.isNil(builder.saveInterval)) {
         this.saveInterval = builder.saveInterval;
       }
