@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Froala, FroalaOptionsBuilder} from "../froala";
 import FroalaEditor from 'froala-editor';
 
@@ -47,5 +47,9 @@ export class AppComponent implements OnInit {
       })
       .build();
     console.log(this.froalaOptions);
+  }
+
+  onChangeContents(contents) {
+    console.log(contents);
   }
 }

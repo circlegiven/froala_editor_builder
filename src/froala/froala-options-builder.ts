@@ -4003,6 +4003,7 @@ export class FroalaOptionsBuilder {
   }
 
   /**
+   * Only used Angular
    * This option synchronizes the angular model as soon as a key is released in the editor.
    * Note that it may affect performances.
    *
