@@ -68,7 +68,7 @@ export class FroalaOptionsBuilder {
   private _documentReady: boolean;
   private _editInPopup: boolean;
   private _editorClass: string;
-  private _enter: string;
+  private _enter: Froala.Enter;
   private _fullPage: boolean;
   private _height: number;
   private _heightMax: number;
@@ -1125,14 +1125,14 @@ export class FroalaOptionsBuilder {
   /**
    * Set the default tag to be used when ENTER key is hit.
    *
-   * @param {string} value
+   * @param {Froala.Enter} value
    * @return {FroalaOptionsBuilder}
    */
-  Enter(value: string): FroalaOptionsBuilder {
+  Enter(value: Froala.Enter): FroalaOptionsBuilder {
     this._enter = value;
     return this;
   }
-  get enter(): string {
+  get enter(): Froala.Enter {
     return this._enter;
   }
 

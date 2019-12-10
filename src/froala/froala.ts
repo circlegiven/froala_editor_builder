@@ -1,6 +1,7 @@
 import * as _ from 'lodash';
 import {FroalaOptionsBuilder} from "./froala-options-builder";
 import * as $ from 'JQuery';
+import FroalaEditor from 'froala-editor';
 
 export namespace Froala {
   export type GenericObject<T> = { [key: string]: T };
@@ -37,6 +38,11 @@ export namespace Froala {
     MP4 = 'mp4',
     WEBM = 'webm',
     OGG = 'ogg',
+  }
+  export enum Enter {
+    ENTER_DIV = FroalaEditor.ENTER_DIV,
+    ENTER_P = FroalaEditor.ENTER_P,
+    ENTER_BR = FroalaEditor.ENTER_BR,
   }
   export enum Plugin {
     ALIGN = 'align',
@@ -431,7 +437,7 @@ export namespace Froala {
     documentReady: boolean;
     editInPopup: boolean;
     editorClass: string;
-    enter: string;
+    enter: Enter;
     fullPage: boolean;
     height: number;
     heightMax: number;
