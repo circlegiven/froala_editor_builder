@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Froala, FroalaOptionsBuilder} from "../froala";
 import FroalaEditor from 'froala-editor';
 
@@ -26,9 +26,11 @@ export class AppComponent implements OnInit {
       .ImageMaxSize(1024 * 1024 * 3)
       .CharCounterCount(true)
       .ToolbarSticky(false)
+      .Theme(Froala.Theme.DARK)
       .ToolbarButtons({
         moreText: {
-          buttons: ['bold', 'italic', 'underline', 'fontSize', 'textColor']
+          buttons: ['bold', 'italic', 'underline', 'fontSize', 'textColor'],
+          buttonsVisible: 2
         },
         moreParagraph: {
           buttons: ['paragraphFormat']
@@ -60,25 +62,101 @@ export class AppComponent implements OnInit {
         },
       })
       .build();
-    FroalaEditor.DefineIcon('alert', {NAME: 'info'});
-    FroalaEditor.RegisterCommand('alert', {
-      title: 'alert',
+    // popup template
+    FroalaEditor.POPUP_TEMPLATES["customPlugin.popup"] = '[_BUTTONS_][_CUSTOM_LAYER_]';
+    // popup buttons
+    Object.assign(FroalaEditor.DEFAULTS, {
+      popupButtons: ['popupClose']
+    });
+    // custom popup inside plugin
+    FroalaEditor.PLUGINS.customPlugin = function(editor) {
+      // Create custom popup.
+      function initPopup () {
+        // Popup buttons.
+        let popup_buttons = '';
+
+        // Create the list of buttons.
+        if (editor.opts.popupButtons.length > 1) {
+          popup_buttons += '<div class="fr-buttons">';
+          popup_buttons += editor.button.buildList(editor.opts.popupButtons);
+          popup_buttons += '</div>';
+        }
+        // Load popup template.
+        const template = {
+          buttons: popup_buttons,
+          custom_layer: '<div class="custom-layer">Hello World!</div>'
+        };
+        // Create popup.
+        const $popup = editor.popups.create('customPlugin.popup', template);
+        return $popup;
+      }
+      // Show the popup
+      function showPopup () {
+        // Get the popup object defined above.
+        let $popup = editor.popups.get('customPlugin.popup');
+
+        // If popup doesn't exist then create it.
+        // To improve performance it is best to create the popup when it is first needed
+        // and not when the editor is initialized.
+        if (!$popup) $popup = initPopup();
+
+        // Set the editor toolbar as the popup's container.
+        editor.popups.setContainer('customPlugin.popup', editor.$tb);
+
+        // This will trigger the refresh event assigned to the popup.
+        // editor.popups.refresh('customPlugin.popup');
+
+        // This custom popup is opened by pressing a button from the editor's toolbar.
+        // Get the button's object in order to place the popup relative to it.
+        const $btn = editor.$tb.find('.fr-command[data-cmd="myButton"]');
+
+        // Set the popup's position.
+        const left = $btn.offset().left + $btn.outerWidth() / 2;
+        const top = $btn.offset().top + (editor.opts.toolbarBottom ? 10 : $btn.outerHeight() - 10);
+
+        // Show the custom popup.
+        // The button's outerHeight is required in case the popup needs to be displayed above it.
+        editor.popups.show('customPlugin.popup', left, top, $btn.outerHeight());
+      }
+
+      // Hide the custom popup.
+      function hidePopup () {
+        editor.popups.hide('customPlugin.popup');
+      }
+
+      // Methods visible outside the plugin.
+      return {
+        showPopup: showPopup,
+        hidePopup: hidePopup
+      }
+    };
+    // define icon
+    FroalaEditor.DefineIcon('buttonIcon', {NAME: 'info',  SVG_KEY: 'search'});
+    FroalaEditor.RegisterCommand('search', {
+      title: '상품 검색',
       focus: false,
       undo: false,
-      refreshAfterCallback: false,
-
-      callback: () => {
-        console.log('Hello!', this);
+      icon: 'buttonIcon',
+      plugin: 'customPlugin',
+      callback: function() {
+        this.customPlugin.showPopup();
       }
     });
+    // Define custom popup close button icon and command.
+    FroalaEditor.DefineIcon('popupClose', { NAME: 'times', SVG_KEY: 'back' });
+    FroalaEditor.RegisterCommand('popupClose', {
+      title: 'Close',
+      undo: false,
+      focus: false,
+      callback: function () {
+        this.customPlugin.hidePopup();
+      }
+    });
+
     console.log(this.froalaOptions);
   }
 
   onChangeContents(contents) {
     console.log(contents);
-  }
-
-  froalaInitTest(data) {
-    console.log('froalaInitTest', data);
   }
 }
