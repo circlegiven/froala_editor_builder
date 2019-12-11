@@ -14,6 +14,8 @@ export class AppComponent implements OnInit {
   froalaOptions: Froala.Options;
 
   ngOnInit(): void {
+    //
+    this.generateEmojione();
     // set froala editor options
     this.froalaOptions = new FroalaOptionsBuilder()
       .HeightMax(400)
@@ -39,7 +41,10 @@ export class AppComponent implements OnInit {
           buttons: ['insertImage']
         },
         moreMisc: {
-          buttons: ['undo', 'alert', 'redo'],
+          buttons: ['undo', 'redo'],
+        },
+        test: {
+          buttons: ['search',],
         }
       })
       .Attribution(false)
@@ -131,12 +136,11 @@ export class AppComponent implements OnInit {
       }
     };
     // define icon
-    FroalaEditor.DefineIcon('buttonIcon', {NAME: 'info',  SVG_KEY: 'search'});
+    FroalaEditor.DefineIcon('search', {NAME: 'info',  SVG_KEY: 'search'});
     FroalaEditor.RegisterCommand('search', {
       title: '상품 검색',
       focus: false,
       undo: false,
-      icon: 'buttonIcon',
       plugin: 'customPlugin',
       callback: function() {
         this.customPlugin.showPopup();
@@ -158,5 +162,16 @@ export class AppComponent implements OnInit {
 
   onChangeContents(contents) {
     console.log(contents);
+  }
+
+  private generateEmojione(): void {
+    FroalaEditor.DefineIcon('emojione', {NAME: 'smile-o', SVG_KEY: 'icon'});
+    FroalaEditor.RegisterCommand('emojione', {
+        title: 'emoticons',
+        focus: false,
+        undo: false,
+        refreshAfterCallback: false,
+        callback: function () {}
+    });
   }
 }
