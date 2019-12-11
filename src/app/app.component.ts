@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     //
-    this.generateEmojione();
+    this.generateSearch();
     // set froala editor options
     this.froalaOptions = new FroalaOptionsBuilder()
       .HeightMax(400)
@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
           buttons: ['undo', 'redo'],
         },
         test: {
-          buttons: ['search',],
+          buttons: ['search'],
         }
       })
       .Attribution(false)
@@ -67,21 +67,41 @@ export class AppComponent implements OnInit {
         },
       })
       .build();
-    // popup template
-    FroalaEditor.POPUP_TEMPLATES["customPlugin.popup"] = '[_BUTTONS_][_CUSTOM_LAYER_]';
-    // popup buttons
-    Object.assign(FroalaEditor.DEFAULTS, {
-      popupButtons: ['popupClose']
+    console.log(this.froalaOptions);
+  }
+
+  onChangeContents(contents) {
+    this.editorContents = contents;
+  }
+
+  private generateSearch(): void {
+    // define icon
+    FroalaEditor.DefineIcon('search', {NAME: 'info',  SVG_KEY: 'search'});
+    FroalaEditor.RegisterCommand('search', {
+      title: '상품 검색',
+      focus: false,
+      undo: false,
+      plugin: 'searchPlugin',
+      callback: function() {
+        this.searchPlugin.showPopup();
+      }
     });
-    // custom popup inside plugin
-    FroalaEditor.PLUGINS.customPlugin = function(editor) {
+    // search popup template 정의
+    // buttons와 layer 프로퍼티 정의
+    FroalaEditor.POPUP_TEMPLATES["searchPlugin.popup"] = '[_BUTTONS_][_CUSTOM_LAYER_]';
+    // search popup 내부의 버튼들 정의
+    Object.assign(FroalaEditor.DEFAULTS, {
+      popupButtons: ['popupClose'],
+    });
+    // search popup 플러그인 정의
+    FroalaEditor.PLUGINS.searchPlugin = function(editor) {
       // Create custom popup.
       function initPopup () {
         // Popup buttons.
         let popup_buttons = '';
 
         // Create the list of buttons.
-        if (editor.opts.popupButtons.length > 1) {
+        if (editor.opts.popupButtons.length > 0) {
           popup_buttons += '<div class="fr-buttons">';
           popup_buttons += editor.button.buildList(editor.opts.popupButtons);
           popup_buttons += '</div>';
@@ -89,31 +109,29 @@ export class AppComponent implements OnInit {
         // Load popup template.
         const template = {
           buttons: popup_buttons,
-          custom_layer: '<div class="custom-layer">Hello World!</div>'
+          custom_layer: '<div class="custom-layer">' +
+                         '<input maxlength="7" type="text" tabindex="1" dir="ltr" class="">' +
+                      '</div>'
         };
         // Create popup.
-        const $popup = editor.popups.create('customPlugin.popup', template);
+        const $popup = editor.popups.create('searchPlugin.popup', template);
         return $popup;
       }
       // Show the popup
       function showPopup () {
-        // Get the popup object defined above.
-        let $popup = editor.popups.get('customPlugin.popup');
-
-        // If popup doesn't exist then create it.
-        // To improve performance it is best to create the popup when it is first needed
-        // and not when the editor is initialized.
-        if (!$popup) $popup = initPopup();
-
+        // 정의된 팝업이 없다면 initial
+        if (!editor.popups.get('searchPlugin.popup')) {
+          initPopup();
+        }
         // Set the editor toolbar as the popup's container.
-        editor.popups.setContainer('customPlugin.popup', editor.$tb);
+        editor.popups.setContainer('searchPlugin.popup', editor.$tb);
 
         // This will trigger the refresh event assigned to the popup.
         // editor.popups.refresh('customPlugin.popup');
 
         // This custom popup is opened by pressing a button from the editor's toolbar.
         // Get the button's object in order to place the popup relative to it.
-        const $btn = editor.$tb.find('.fr-command[data-cmd="myButton"]');
+        const $btn = editor.$tb.find('.fr-command[data-cmd="search"]');
 
         // Set the popup's position.
         const left = $btn.offset().left + $btn.outerWidth() / 2;
@@ -121,12 +139,12 @@ export class AppComponent implements OnInit {
 
         // Show the custom popup.
         // The button's outerHeight is required in case the popup needs to be displayed above it.
-        editor.popups.show('customPlugin.popup', left, top, $btn.outerHeight());
+        editor.popups.show('searchPlugin.popup', left, top, $btn.outerHeight());
       }
 
       // Hide the custom popup.
       function hidePopup () {
-        editor.popups.hide('customPlugin.popup');
+        editor.popups.hide('searchPlugin.popup');
       }
 
       // Methods visible outside the plugin.
@@ -135,17 +153,7 @@ export class AppComponent implements OnInit {
         hidePopup: hidePopup
       }
     };
-    // define icon
-    FroalaEditor.DefineIcon('search', {NAME: 'info',  SVG_KEY: 'search'});
-    FroalaEditor.RegisterCommand('search', {
-      title: '상품 검색',
-      focus: false,
-      undo: false,
-      plugin: 'customPlugin',
-      callback: function() {
-        this.customPlugin.showPopup();
-      }
-    });
+
     // Define custom popup close button icon and command.
     FroalaEditor.DefineIcon('popupClose', { NAME: 'times', SVG_KEY: 'back' });
     FroalaEditor.RegisterCommand('popupClose', {
@@ -153,25 +161,8 @@ export class AppComponent implements OnInit {
       undo: false,
       focus: false,
       callback: function () {
-        this.customPlugin.hidePopup();
+        this.searchPlugin.hidePopup();
       }
-    });
-
-    console.log(this.froalaOptions);
-  }
-
-  onChangeContents(contents) {
-    console.log(contents);
-  }
-
-  private generateEmojione(): void {
-    FroalaEditor.DefineIcon('emojione', {NAME: 'smile-o', SVG_KEY: 'icon'});
-    FroalaEditor.RegisterCommand('emojione', {
-        title: 'emoticons',
-        focus: false,
-        undo: false,
-        refreshAfterCallback: false,
-        callback: function () {}
     });
   }
 }
